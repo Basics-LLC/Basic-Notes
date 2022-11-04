@@ -9,11 +9,11 @@
     <script>
 		if ("serviceWorker" in navigator) {
 			window.addEventListener("load", () => {
-				navigator.serviceWorker && navigator.serviceWorker.register("./sw.js");
+				navigator.serviceWorker && navigator.serviceWorker.register("./frontend/static/serviceWorker.js");
 			});
 		}
 	</script>
-    
+
 </head>
 <body>
     <div id="main">
