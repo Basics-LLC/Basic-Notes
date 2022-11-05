@@ -9,7 +9,7 @@ export default class extends AbstractView {
    */
   constructor(params) {
     super(params);
-    this.setTitle('Note');
+    this.setTitle('Basic Note');
   }
 
   /**

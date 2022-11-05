@@ -8,6 +8,6 @@ describe('Note view tests', () => {
   new Note('nothing');
 
   test('Note constructor test', () => {
-    expect(document.title).toBe('Note');
+    expect(document.title).toBe('Basic Note');
   });
 });
