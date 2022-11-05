@@ -6,5 +6,12 @@
 	"start_url": "./?utm_source=pwa_install",
 	"scope": ".",
 	"theme_color": "#000",
-	"background_color": "#000"
+	"background_color": "#000",
+    "icons":[
+        {
+            "src": "./images/android-chrome-144x144.png",
+            "sizes": "144x144",
+            "type": "image/png"
+        }
+    ]
 }
