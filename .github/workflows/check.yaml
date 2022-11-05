@@ -19,7 +19,7 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: Install modules
-      run: npm
+      run: npm install
     - name: Run ESLint
       run: npm run lint
     - name: Use Node.js ${{ matrix.node-version }}
