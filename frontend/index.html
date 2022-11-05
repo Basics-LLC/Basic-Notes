@@ -7,13 +7,17 @@
     <link rel="stylesheet" href="/static/css/index.css">
 </head>
 <body>
-    <h1>Hello World</h1>
-    <nav class="nav">
-        <a href="/" class="nav__link" data-link>link1</a>
-        <a href="/link2" class="nav__link" data-link>link2</a>
-        <a href="/link2" class="nav__link" data-link>link3</a>
-    </nav>
-    <div id="app"></div>
+    <div id="main">
+        <input type="text" id="title" placeholder="Name of Note">
+        <br>
+        <textarea id="textarea" placeholder="Enter text here"></textarea>
+    </div>
+    <div id="button-group">
+        <button type="button" class="button" id="new-file">New File</button>
+        <button type="button" class="button" id="upload-file">Upload File</button>
+        <button type="button" class="button" id="save-file">Save File</button>
+    </div>
+
     <script type="module" src="/static/js/index.js"></script>
 </body>
 </html>
