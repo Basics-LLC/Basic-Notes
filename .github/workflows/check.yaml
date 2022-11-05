@@ -14,14 +14,14 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [10.x, 12.x, 14.x, 15.x, 18.x]
+        node-version: [14.x, 15.x, 18.x]
 
     steps:
     - uses: actions/checkout@v3
     - name: Install modules
-      run: yarn
+      run: npm
     - name: Run ESLint
-      run: eslint . --ext .js,.jsx,.ts,.tsx
+      run: npm run lint
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v3
       with:
