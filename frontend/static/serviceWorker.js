@@ -7,7 +7,6 @@ self.addEventListener('install', (event) => {
   event.waitUntil(
       caches.open(cacheName).then((cache) => {
         return cache.addAll([
-          '../../',
           '../../index.html', // Main HTML file
           './manifest.json', // Manifest file
           './css/index.css', // Main CSS file
@@ -41,6 +40,10 @@ self.addEventListener('activate', (event) => {
  * then updates once the network has returned the latest data.
  */
 self.addEventListener('fetch', (event) => {
+  if(!event.request.url.startsWith('http')){
+    //skip request
+    return;
+  }
   event.respondWith(
       caches.open(cacheName).then((cache) => {
         return cache.match(event.request).then((response) => {
