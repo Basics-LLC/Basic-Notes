@@ -1,0 +1,16 @@
+{
+	"name": "Basic Notes PWA",
+	"short_name": "Basic Notes PWA",
+	"display": "standalone",
+	"start_url": "./?utm_source=pwa_install",
+	"scope": ".",
+	"theme_color": "#000",
+	"background_color": "#000",
+    "icons":[
+        {
+            "src": "frontend/static/images/apple-touch-icon-144x144.png",
+            "sizes": "144x144",
+            "type": "image/png"
+        }
+    ]
+}

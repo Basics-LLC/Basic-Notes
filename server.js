@@ -6,15 +6,15 @@ const app = express();
 app.use('/frontend',
     express.static(path.resolve(__dirname, 'frontend')));
 
-app.get('/index.html', (_req, res) => {
-  res.sendFile(path.resolve('index.html'));
+app.get('/serviceWorker.js', (_req, res) => {
+  res.sendFile(path.resolve('serviceWorker.js'));
 });
 
-app.get('/*pwa_install', (_req, _res) => {
-  // do nothing
+app.get('/manifest.json', (_req, res) => {
+  res.sendFile(path.resolve('manifest.json'));
 });
 
-app.get('/', (_req, res) => {
+app.get('/*', (_req, res) => {
   res.sendFile(path.resolve('index.html'));
 });
 

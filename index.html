@@ -5,12 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Basic Notes</title>
     <link rel="stylesheet" href="frontend/static/css/index.css">
-    <link rel="manifest" href="frontend/static/manifest.json">
+    <link rel="manifest" href="./manifest.json">
 
     <script>
 		if ("serviceWorker" in navigator) {
 			window.addEventListener("load", () => {
-				navigator.serviceWorker && navigator.serviceWorker.register("frontend/static/serviceWorker.js");
+				navigator.serviceWorker && navigator.serviceWorker.register("./serviceWorker.js");
 			});
 		}
 	</script>
