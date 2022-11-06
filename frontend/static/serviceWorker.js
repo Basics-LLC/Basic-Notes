@@ -7,10 +7,11 @@ self.addEventListener('install', (event) => {
   event.waitUntil(
       caches.open(cacheName).then((cache) => {
         return cache.addAll([
-          '/',
-          'index.html', // Main HTML file
-          '/static/manifest.json', // Manifest file
-          '/static/css/style.css', // Main CSS file
+          '../../',
+          '../../index.html', // Main HTML file
+          './manifest.json', // Manifest file
+          './css/index.css', // Main CSS file
+          './js/index.js', // Main JS file
         ]);
       }),
   );
