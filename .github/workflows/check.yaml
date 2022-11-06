@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main
+      - pwa-dev
     paths-ignore:
       - README.md
       - LICENSE
