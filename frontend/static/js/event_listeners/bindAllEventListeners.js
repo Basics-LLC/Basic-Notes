@@ -2,9 +2,11 @@ export {bindAllEventListeners};
 
 import {cleanUp} from '../text_handlers/cleanUp.js';
 import {openFileDialog, readFile} from '../text_handlers/upload.js';
+import {saveFile} from '../text_handlers/save.js';
 
 const newFileId = 'new-file';
 const uploadFileId = 'upload-file';
+const saveFileId = 'save-file';
 const titleId = 'title';
 const textareaId = 'textarea';
 const fileSelectorId = 'fileLoader';
@@ -48,4 +50,5 @@ function bindAllEventListeners() {
   bindEventListener(uploadFileId, clickEvent, openFileDialog, fileSelectorId);
   bindEventListenerAsync(fileSelectorId, changeEvent, readFile,
       fileSelectorId, titleId, textareaId);
+  bindEventListenerAsync(saveFileId, clickEvent, saveFile, titleId, textareaId);
 }
