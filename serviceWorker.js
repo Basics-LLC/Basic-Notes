@@ -9,8 +9,8 @@ self.addEventListener("install", event => {
 			return cache.addAll([
 				"/",
 				"index.html", // Main HTML file
-				"/static/manifest.json", // Manifest file
-				"/static/css/style.css", // Main CSS file
+				"/frontend/static/manifest.json", // Manifest file
+				"/frontend/static/css/index.css", // Main CSS file
 			]);
 		})
 	);
