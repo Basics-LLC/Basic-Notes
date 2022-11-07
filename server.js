@@ -3,11 +3,19 @@ const path = require('path');
 
 const app = express();
 
-app.use('/static',
-    express.static(path.resolve(__dirname, 'frontend', 'static')));
+app.use('/frontend',
+    express.static(path.resolve(__dirname, 'frontend')));
 
-app.get('/*', (req, res) => {
-  res.sendFile(path.resolve('frontend', 'index.html'));
+app.get('/serviceWorker.js', (_req, res) => {
+  res.sendFile(path.resolve('serviceWorker.js'));
+});
+
+app.get('/manifest.json', (_req, res) => {
+  res.sendFile(path.resolve('manifest.json'));
+});
+
+app.get('/*', (_req, res) => {
+  res.sendFile(path.resolve('index.html'));
 });
 
 app.listen(process.env.PORT || 8080, () => console.log('Server running...'));

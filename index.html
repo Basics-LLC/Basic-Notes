@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Basic Notes</title>
-    <link rel="stylesheet" href="/frontend/static/css/index.css">
-    <link rel="manifest" href="./frontend/static/manifest.json">
+    <link rel="stylesheet" href="frontend/static/css/index.css">
+    <link rel="manifest" href="./manifest.json">
 
     <script>
 		if ("serviceWorker" in navigator) {
@@ -17,13 +17,18 @@
 
 </head>
 <body>
-    <h1>Hello World</h1>
-    <nav class="nav">
-        <a href="/" class="nav__link" data-link>link1</a>
-        <a href="/link2" class="nav__link" data-link>link2</a>
-        <a href="/link2" class="nav__link" data-link>link3</a>
-    </nav>
-    <div id="app"></div>
-    <script type="module" src="/frontend/static/js/index.js"></script>
+    <div id="main">
+        <input type="text" id="title" placeholder="Name of Note" />
+        <br>
+        <textarea id="textarea" placeholder="Enter text here"></textarea>
+    </div>
+    <input type="file" id="fileLoader" name="files" title="Load File" accept=".txt" />
+    <div id="button-group">
+        <button type="button" class="button" id="new-file">New File</button>
+        <button type="button" class="button" id="upload-file">Upload File</button>
+        <button type="button" class="button" id="save-file">Save File</button>
+    </div>
+
+    <script type="module" src="frontend/static/js/index.js"></script>
 </body>
 </html>
