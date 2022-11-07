@@ -11,6 +11,9 @@ self.addEventListener('install', (event) => {
           'manifest.json', // Manifest file
           'frontend/static/css/index.css', // Main CSS file
           'frontend/static/js/index.js', // Main JS file
+          'frontend/static/js/text_handlers/cleanUp.js',
+          'frontend/static/js/text_handlers/upload.js',
+          'frontend/static/js/event_listeners/bindAllEventListeners.js',
         ]);
       }),
   );
