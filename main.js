@@ -1,4 +1,5 @@
-const { app, BrowserWindow } = require('electron')
+const { app, BrowserWindow, Menu } = require('electron')
+const path = require('path')
 
 let mainWindow
 
@@ -8,14 +9,25 @@ function createWindow() {
     width: 1000, height: 800,
     webPreferences: {
       contextIsolation: false,
-      nodeIntegration: true
-    }
+      nodeIntegration: true,
+      enableRemoteModule: true,
+    },
   })
+  //Open the dev tools
+  // mainWindow.webContents.openDevTools()
 
-  mainWindow.loadFile('frontend/index.html')
+  // Create Menu
+  menuTemplate = require('./frontend/static/js/menu.js')(mainWindow);
+  const menu = Menu.buildFromTemplate(menuTemplate)
+  Menu.setApplicationMenu(menu)
+
+  mainWindow.loadFile(__dirname + '/frontend/index.html')
 
   mainWindow.on('closed', () => {
     mainWindow = null
+  })
+  mainWindow.on('ready-to-show', () => {
+    mainWindow.show()
   })
 }
 

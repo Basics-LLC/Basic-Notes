@@ -1,23 +1,32 @@
 {
-  "name": "basice-notes",
+  "name": "basics-notes",
   "version": "1.0.0",
-  "description": "",
+  "description": "A simple note keeping app by Basics LLC",
   "main": "main.js",
   "scripts": {
-    "start": "electron .",
+    "start": "electron-forge start",
     "watch": "nodemon --exec electron .",
-    "reset": "git reset --hard"
+    "reset": "git reset --hard",
+    "package": "electron-forge package",
+    "make": "electron-forge make"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Basics-LLC/Basice-Notes.git"
   },
   "keywords": [],
-  "author": "",
+  "author": "Saumitra Sapre",
   "license": "ISC",
   "devDependencies": {
-    "electron": "^9.0.0",
+    "@electron-forge/cli": "^6.0.0",
+    "@electron-forge/maker-deb": "^6.0.0",
+    "@electron-forge/maker-rpm": "^6.0.0",
+    "@electron-forge/maker-squirrel": "^6.0.0",
+    "@electron-forge/maker-zip": "^6.0.0",
+    "electron": "3.0.7",
     "nodemon": "^2.0.0"
   },
-  "dependencies": {}
+  "dependencies": {
+    "electron-squirrel-startup": "^1.0.0"
+  }
 }

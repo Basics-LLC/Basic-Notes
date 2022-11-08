@@ -1,63 +1,157 @@
-import Note from './views/Note.js';
+const { contextBridge, ipcRenderer } = require('electron');
+const electron = require('electron')
+const {dialog } = require('electron').remote;
+const path = require('path');
+const fs = require('fs');
 
-const pathToRegex = (path) =>
-  new RegExp('^' + path.replace(/\//g, '\\/').replace(/:\w+/g, '(.+)') + '$');
+//Element Declarations
+let newFileBtn = document.getElementById("new-file");
+let uploadFileBtn = document.getElementById("upload-file");
+let saveFileBtn = document.getElementById("save-file");
+var textContent = document.getElementById("textarea");
+var noteTitle = document.getElementById("title");
 
-const getParams = (match) => {
-  const values = match.result.slice(1);
-  const keys =
-    Array.from(match.route.path.matchAll(/:(\w+)/g)).map((result) => result[1]);
+var activeFile ="";
 
-  return Object.fromEntries(keys.map((key, i) => {
-    return [key, values[i]];
-  }));
-};
-
-const navigateTo = (url) => {
-  history.pushState(null, null, url);
-  router();
-};
-
-const router = async () => {
-  const routes = [
-    {path: '/', View: Note},
-    {path: '/link1', View: Note},
-    {path: '/link2/:id', View: Note},
-    {path: '/link3', View: Note},
-  ];
-
-  // Test each route for potential match
-  const potentialMatches = routes.map((route) => {
-    return {
-      route: route,
-      result: location.pathname.match(pathToRegex(route.path)),
-    };
-  });
-
-  let match = potentialMatches
-      .find((potentialMatch) => potentialMatch.result !== null);
-
-  if (!match) {
-    match = {
-      route: routes[0],
-      result: [location.pathname],
-    };
+//Button Actions
+saveFileBtn.addEventListener("click",() =>{
+  var fname = "";
+  var content=textContent.value;
+  if(isFileActive()){
+      fname = getActiveFile();
+  }else{
+      fname = openSaveDialog("");
   }
-
-  const view = new match.route.View(getParams(match));
-
-  document.querySelector('#app').innerHTML = await view.getHtml();
-};
-
-window.addEventListener('popstate', router);
-
-document.addEventListener('DOMContentLoaded', () => {
-  document.body.addEventListener('click', (e) => {
-    if (e.target.matches('[data-link]')) {
-      e.preventDefault();
-      navigateTo(e.target.href);
-    }
-  });
-
-  router();
+  createFile(fname);
+  return false;
 });
+
+electron.ipcRenderer.on('open-file', (event, arg) => {
+  var filename = openSelectFileDialog();
+  openFile(filename);
+
+});
+
+electron.ipcRenderer.on('new-file', (event, arg) => {
+  cancelFileEdit();
+});
+
+uploadFileBtn.addEventListener("click",() =>{
+  var filename = openSelectFileDialog();
+  openFile(filename);
+});
+
+newFileBtn.addEventListener("click",() =>{
+  cancelFileEdit();
+  return false;
+})
+
+
+
+// Compound Functions
+
+function saveFile(filename){
+  setActiveFile(filename);
+  setCurrentFileName();
+  // showAlertBar(); //Notify about saved file
+}
+
+function openFile(filename){
+  setActiveFile(filename);
+  setCurrentFileName();
+  writeFileToTextArea();
+}
+
+function cancelFileEdit(){
+  setActiveFile(undefined);
+  noteTitle.value = ""
+  textContent.value = "";
+}
+
+// //Utililty Functions
+
+function writeFileToTextArea(){
+  var currentFile = getActiveFile();
+  if(validateFile(currentFile)){
+      var mdData = fs.readFileSync(getActiveFile()).toString();
+      textContent.value = mdData;
+  }
+}
+
+
+function isFileActive(){
+  if(activeFile=== undefined || activeFile ===""){
+      return false;
+  }
+  return true;
+}
+
+function getActiveFile(){
+  return activeFile;
+}
+
+function createFile(fname){
+  var content=textContent.value;
+  writeToFile(content, fname).then(function(){
+      saveFile(fname);
+  });
+}
+
+function validateFile(filename){
+  var ext = path.extname(filename);
+  if(ext === ".md"){
+      return true;
+  }
+  return false;
+}
+
+function setCurrentFileName(){
+  var filename = getActiveFile();
+  noteTitle.value = getFileName(filename);
+}
+
+function openSaveDialog(df){
+  var filename= dialog.showSaveDialog(
+      { defaultPath: df, properties: ['selectFile'] });
+  setActiveFile(filename);
+  return filename;
+}
+
+
+function openSelectFileDialog(){
+  var files = dialog.showOpenDialog(
+      { properties: ['openFile'] });
+   var filename = files[0];
+   return filename;
+}
+
+function getFileName(fullPath){
+  if(fullPath !== undefined){
+      return fullPath.toString().replace(/^.*[\\\/]/, '');
+  }
+}
+
+function addRecentFile(fileName, filePath){
+// ***STUB***
+//TODO: Implement database to fetch recent files
+}
+
+function setActiveFile(filename){
+  activeFile = filename;
+  var name = getFileName(filename);
+  if(filename !== undefined){
+      addRecentFile(name, filename)
+  }
+}
+
+async function writeToFile(text, filename){
+  console.log(filename);
+  if(filename!== undefined && validateFile(filename)){
+      fs.writeFile(filename, text, function(err) {
+          if(err) {
+              return console.log(err);
+          }
+          return true;
+      }); 
+  }
+}
