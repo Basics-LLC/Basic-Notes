@@ -13,6 +13,7 @@ self.addEventListener('install', (event) => {
           'frontend/static/js/index.js', // Main JS file
           'frontend/static/js/text_handlers/cleanUp.js',
           'frontend/static/js/text_handlers/upload.js',
+          'frontend/static/js/text_handlers/save.js',
           'frontend/static/js/event_listeners/bindAllEventListeners.js',
         ]);
       }),
