@@ -1,4 +1,4 @@
-# Basice-Notes
+# Basic-Notes
 
 After cloning the repo, please run `npm install`.
 
