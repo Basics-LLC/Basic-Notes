@@ -2,7 +2,9 @@
 
 After cloning the repo, please run `npm install`.
 
-To run the server locally: `node server.js` (Run this at root of the project), and then open `localhost:8080` at your browser.
+In order to run the app, run `npm start`. This will open the app.
+
+In order to package the app into a desktop application, run `npm run make`. This will create an `out/` directory which will house your packaged app.
 
 To run eslint test: `npm run lint`.
 

@@ -7,13 +7,7 @@
     <link rel="stylesheet" href="frontend/static/css/index.css">
     <link rel="manifest" href="./manifest.json">
 
-    <script>
-		if ("serviceWorker" in navigator) {
-			window.addEventListener("load", () => {
-				navigator.serviceWorker && navigator.serviceWorker.register("./serviceWorker.js");
-			});
-		}
-	</script>
+    <script type="module" src="./app.js"></script>
 
 </head>
 <body>

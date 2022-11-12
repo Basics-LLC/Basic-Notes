@@ -9,8 +9,10 @@ self.addEventListener('install', (event) => {
         return cache.addAll([
           'index.html', // Main HTML file
           'manifest.json', // Manifest file
+          'app.js',
           'frontend/static/css/index.css', // Main CSS file
           'frontend/static/js/index.js', // Main JS file
+          'frontend/static/js/checkElectron.js',
           'frontend/static/js/text_handlers/cleanUp.js',
           'frontend/static/js/text_handlers/upload.js',
           'frontend/static/js/text_handlers/save.js',
