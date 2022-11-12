@@ -5,6 +5,7 @@ on:
     branches:
       - main
       - pwa-dev
+      - merge-both
     paths-ignore:
       - README.md
       - LICENSE
