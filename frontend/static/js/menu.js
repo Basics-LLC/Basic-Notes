@@ -1,16 +1,21 @@
-module.exports = function(mainWindow){
-    
-    const template = [
-        {
+/**
+ * Export the menu module 
+ * @param {object} mainWindow 
+ * @returns {JSON} - JSON template to handle the file I/O
+ */
+module.exports = function (mainWindow) {
+
+   const template = [
+      {
          label: 'File',
          submenu: [
             {
-                label:"New File",
-                click () { mainWindow.webContents.send('new-file'); }
+               label: "New File",
+               click() { mainWindow.webContents.send('new-file'); }
             },
             {
                label: 'Open File',
-               click () { mainWindow.webContents.send('open-file'); }
+               click() { mainWindow.webContents.send('open-file'); }
             },
             {
                type: 'separator'
@@ -43,14 +48,14 @@ module.exports = function(mainWindow){
             }
          ]
       },
-      
+
       {
          label: 'View',
          submenu: [
             {
-                label: 'Clear Recents',
-                click () { mainWindow.webContents.send('clear-recents', 'Hello World!'); }
-             },
+               label: 'Clear Recents',
+               click() { mainWindow.webContents.send('clear-recents', 'Hello World!'); }
+            },
             {
                role: 'reload'
             },
@@ -61,8 +66,8 @@ module.exports = function(mainWindow){
                type: 'separator'
             },
             {
-                label: 'Toggle Recents',
-                click () { mainWindow.webContents.send('toggle-recents', 'Hello World!'); }
+               label: 'Toggle Recents',
+               click() { mainWindow.webContents.send('toggle-recents', 'Hello World!'); }
             },
             {
                type: 'separator'
@@ -72,7 +77,7 @@ module.exports = function(mainWindow){
             }
          ]
       },
-      
+
       {
          role: 'window',
          submenu: [
@@ -84,8 +89,8 @@ module.exports = function(mainWindow){
             }
          ]
       },
-    ]
+   ]
 
-    return template;
+   return template;
 
 }

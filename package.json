@@ -8,7 +8,8 @@
     "watch": "nodemon --exec electron .",
     "reset": "git reset --hard",
     "package": "electron-forge package",
-    "make": "electron-forge make"
+    "make": "electron-forge make",
+    "doc": "jsdoc -c jsdoc.json"
   },
   "repository": {
     "type": "git",

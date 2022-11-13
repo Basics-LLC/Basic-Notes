@@ -2,7 +2,9 @@ const { app, BrowserWindow, Menu } = require('electron')
 const path = require('path')
 
 let mainWindow
-
+/**
+ * create main window for our application
+ */
 function createWindow() {
 
   mainWindow = new BrowserWindow({
