@@ -15,7 +15,7 @@ function createWindow() {
   // mainWindow.webContents.openDevTools()
 
   // Create Menu
-  menuTemplate = require('./frontend/static/js/menu.js')(mainWindow);
+  menuTemplate = require('./frontend/static/js/js_electron/menu.js')(mainWindow);
   const menu = Menu.buildFromTemplate(menuTemplate);
   Menu.setApplicationMenu(menu);
 

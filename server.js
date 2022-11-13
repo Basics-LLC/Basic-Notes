@@ -10,8 +10,8 @@ app.get('/serviceWorker.js', (_req, res) => {
   res.sendFile(path.resolve('serviceWorker.js'));
 });
 
-app.get('/app.js', (_req, res) => {
-  res.sendFile(path.resolve('app.js'));
+app.get('/pwa_register.js', (_req, res) => {
+  res.sendFile(path.resolve('pwa_register.js'));
 });
 
 app.get('/manifest.json', (_req, res) => {

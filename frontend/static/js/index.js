@@ -1,9 +1,9 @@
 import {bindAllEventListeners} from
-  './event_listeners/bindAllEventListeners.js';
+  './js_pwa/event_listeners/bindAllEventListeners.js';
 import {isElectron} from './checkElectron.js';
 
 if (!isElectron()) {
   bindAllEventListeners();
 } else {
-  require('./event_listeners/bindAllEventListenersInElec.js')();
+  require('./js_electron/event_listeners/bindAllEventListenersInElec')();
 }

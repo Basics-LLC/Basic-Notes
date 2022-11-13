@@ -1,4 +1,4 @@
-const cacheName = 'cache1'; // Change value to force update
+const cacheName = 'cache2'; // Change value to force update
 
 self.addEventListener('install', (event) => {
   // Kick out the old service worker
@@ -9,14 +9,14 @@ self.addEventListener('install', (event) => {
         return cache.addAll([
           'index.html', // Main HTML file
           'manifest.json', // Manifest file
-          'app.js',
+          'pwa_register.js',
           'frontend/static/css/index.css', // Main CSS file
           'frontend/static/js/index.js', // Main JS file
           'frontend/static/js/checkElectron.js',
-          'frontend/static/js/text_handlers/cleanUp.js',
-          'frontend/static/js/text_handlers/upload.js',
-          'frontend/static/js/text_handlers/save.js',
-          'frontend/static/js/event_listeners/bindAllEventListeners.js',
+          'frontend/static/js/js_pwa/text_handlers/cleanUp.js',
+          'frontend/static/js/js_pwa/text_handlers/upload.js',
+          'frontend/static/js/js_pwa/text_handlers/save.js',
+          'frontend/static/js/js_pwa/event_listeners/bindAllEventListeners.js',
         ]);
       }),
   );
