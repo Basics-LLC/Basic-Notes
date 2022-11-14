@@ -1,7 +1,7 @@
 /**
  * @jest-environment jsdom
  */
-import {cleanUp} from '../../frontend/static/js/js_pwa/text_handlers/cleanUp.js';
+import {cleanUp} from '../../../frontend/static/js/js_pwa/text_handlers/cleanUp.js';
 
 describe('The value of given elements should be cleared', () => {
   test('Input element value should be cleared', () => {

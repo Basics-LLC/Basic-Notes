@@ -2,7 +2,7 @@
  * @jest-environment jsdom
  */
 import {onFileReadListener} from
-  '../../frontend/static/js/js_pwa/text_handlers/upload.js';
+  '../../../frontend/static/js/js_pwa/text_handlers/upload.js';
 
 describe('The file contents should be properly processed', () => {
   test('Fill a regular file', async () => {
