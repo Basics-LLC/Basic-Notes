@@ -58,6 +58,12 @@ a {
     width: 20%;
 }
 
+#render {
+    float: right;
+    height: 30px;
+    width: 150px;
+}
+
 #textarea {
     resize: none;
     height: 90%;
@@ -67,6 +73,7 @@ a {
     max-width: 100%;
     margin-bottom: 15px;
     box-sizing: border-box;
+    display: block;
 }
 
 #button-group {

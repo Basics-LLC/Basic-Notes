@@ -6,17 +6,17 @@
     <title>Basic Notes</title>
     <link rel="stylesheet" href="frontend/static/css/index.css">
     <link rel="manifest" href="./manifest.json">
-
     <script type="module" src="./pwa_register.js"></script>
 
 </head>
 <body>
     <div id="main">
         <input type="text" id="title" placeholder="Name of Note" />
+        <button type="button" id="render">Markdown!</button>
         <br>
         <textarea id="textarea" placeholder="Enter text here"></textarea>
     </div>
-    <input type="file" id="fileLoader" name="files" title="Load File" accept=".txt" />
+    <input type="file" id="fileLoader" name="files" title="Load File" accept=".txt, .md" />
     <div id="button-group">
         <button type="button" class="button" id="new-file">New File</button>
         <button type="button" class="button" id="upload-file">Upload File</button>

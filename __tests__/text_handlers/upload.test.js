@@ -8,7 +8,7 @@ describe('The file contents should be properly processed', () => {
   test('Fill a regular file', async () => {
     document.body.innerHTML =
             '<div>' +
-            '  <textarea id="testarea" value="Enter"></textarea>' +
+            '  <textarea id="testarea">Enter</textarea>' +
             '  <input type="text" id="testTitle" value="Name">' +
             '</div>';
     onFileReadListener(['testTitle', 'testarea'], ['foo.txt', 'foo']);

@@ -10,7 +10,7 @@ describe('Construct and download file according to text', () => {
     jest.spyOn(document, 'createElement').mockReturnValueOnce(link);
     document.body.innerHTML =
             '<div>' +
-            '  <textarea id="testarea" value="Enter"></textarea>' +
+            '  <textarea id="testarea">Enter</textarea>' +
             '  <input type="text" id="testTitle" value="Name">' +
             '</div>';
     await saveFile('testTitle', 'testarea');
