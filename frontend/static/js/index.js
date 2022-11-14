@@ -1,6 +1,6 @@
-import {bindAllEventListeners} from
+import { bindAllEventListeners } from
   './js_pwa/event_listeners/bindAllEventListeners.js';
-import {isElectron} from './checkElectron.js';
+import { isElectron } from './checkElectron.js';
 
 if (!isElectron()) {
   bindAllEventListeners();
