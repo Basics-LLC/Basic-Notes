@@ -1,7 +1,5 @@
 export {renderMarkdown};
 
-// import { marked } from 'marked';
-
 const DISPLAYED = 'block';
 const HIDDEN = 'none';
 const markdownValue = 'Markdown!';
@@ -48,8 +46,9 @@ function flipButtonText(id, contentElement) {
  * @param {string} divId The id of the mian div. Should be 'main'.
  * @param {string} buttonId The id of the rendering button.
  * @param {Object} marked The object of markdown render.
+ * @param {Object} DOMPurify The object to filter generated dom.
  */
-function renderMarkdown(id, divId, buttonId, marked) {
+function renderMarkdown(id, divId, buttonId, marked, DOMPurify) {
   const contentElement = flipContentStatus(id);
   flipButtonText(buttonId, contentElement);
   const mainDiv = document.getElementById(divId);
@@ -57,7 +56,7 @@ function renderMarkdown(id, divId, buttonId, marked) {
     mainDiv.removeChild(mainDiv.lastChild);
   } else {
     const text = contentElement.value;
-    const parsedHTML = marked.parse(text);
+    const parsedHTML = DOMPurify.sanitize(marked.parse(text));
     const div = document.createElement('div');
     div.setAttribute('id', 'markdown');
     div.innerHTML = parsedHTML;

@@ -5,6 +5,7 @@ import {openFileDialog, readFile} from '../text_handlers/upload.js';
 import {saveFile} from '../text_handlers/save.js';
 import {renderMarkdown} from '../text_handlers/markdown.js';
 import 'https://cdn.jsdelivr.net/npm/marked/marked.min.js';
+import 'https://cdn.jsdelivr.net/npm/dompurify@2.4.1/dist/purify.min.js';
 
 const newFileId = 'new-file';
 const uploadFileId = 'upload-file';
@@ -56,5 +57,5 @@ function bindAllEventListeners() {
       fileSelectorId, titleId, textareaId);
   bindEventListenerAsync(saveFileId, clickEvent, saveFile, titleId, textareaId);
   bindEventListener(renderId, clickEvent, renderMarkdown,
-      textareaId, mainDivId, renderId, marked);
+      textareaId, mainDivId, renderId, marked, DOMPurify);
 }

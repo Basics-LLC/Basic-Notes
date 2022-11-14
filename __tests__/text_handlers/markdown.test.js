@@ -2,6 +2,7 @@
  * @jest-environment jsdom
  */
 import {marked} from 'marked';
+import * as DOMPurify from 'dompurify';
 import {renderMarkdown} from
   '../../frontend/static/js/js_pwa/text_handlers/markdown.js';
 
@@ -18,9 +19,9 @@ describe('Should render markdown from textarea correctly', () => {
             '  <button type="button" id="render">Markdown!</button>' +
             '  <textarea id="textarea"></textarea>' +
             '</div>';
-    renderMarkdown(textareaId, mainDivId, renderButtonId, marked);
+    renderMarkdown(textareaId, mainDivId, renderButtonId, marked, DOMPurify);
     expect(document.getElementById(renderButtonId).innerHTML).toBe('Raw Text');
-    renderMarkdown(textareaId, mainDivId, renderButtonId, marked);
+    renderMarkdown(textareaId, mainDivId, renderButtonId, marked, DOMPurify);
     expect(document.getElementById(renderButtonId).innerHTML).toBe('Markdown!');
   });
 
@@ -31,7 +32,7 @@ describe('Should render markdown from textarea correctly', () => {
             '  <button type="button" id="render">Markdown!</button>' +
             '  <textarea id="textarea"># Enter text here</textarea>' +
             '</div>';
-    renderMarkdown(textareaId, mainDivId, renderButtonId, marked);
+    renderMarkdown(textareaId, mainDivId, renderButtonId, marked, DOMPurify);
     expect(document.getElementById(markdownDivId).innerHTML)
         .toBe(marked.parse('# Enter text here'));
   });
@@ -43,9 +44,9 @@ describe('Should render markdown from textarea correctly', () => {
             '  <button type="button" id="render">Markdown!</button>' +
             '  <textarea id="textarea"># Enter text here</textarea>' +
             '</div>';
-    renderMarkdown(textareaId, mainDivId, renderButtonId, marked);
+    renderMarkdown(textareaId, mainDivId, renderButtonId, marked, DOMPurify);
     expect(document.getElementById(textareaId).style.display).toBe('none');
-    renderMarkdown(textareaId, mainDivId, renderButtonId, marked);
+    renderMarkdown(textareaId, mainDivId, renderButtonId, marked, DOMPurify);
     expect(document.getElementById(textareaId).style.display).toBe('block');
   });
 });
