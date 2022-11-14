@@ -16,7 +16,9 @@ self.addEventListener('install', (event) => {
           'frontend/static/js/js_pwa/text_handlers/cleanUp.js',
           'frontend/static/js/js_pwa/text_handlers/upload.js',
           'frontend/static/js/js_pwa/text_handlers/save.js',
+          'frontend/static/js/js_pwa/text_handlers/markdown.js',
           'frontend/static/js/js_pwa/event_listeners/bindAllEventListeners.js',
+          'https://cdn.jsdelivr.net/npm/marked/marked.min.js',
         ]);
       }),
   );

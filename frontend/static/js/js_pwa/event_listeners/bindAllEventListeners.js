@@ -3,13 +3,18 @@ export {bindAllEventListeners};
 import {cleanUp} from '../text_handlers/cleanUp.js';
 import {openFileDialog, readFile} from '../text_handlers/upload.js';
 import {saveFile} from '../text_handlers/save.js';
+import {renderMarkdown} from '../text_handlers/markdown.js';
+import 'https://cdn.jsdelivr.net/npm/marked/marked.min.js';
+import 'https://cdn.jsdelivr.net/npm/dompurify@2.4.1/dist/purify.min.js';
 
 const newFileId = 'new-file';
 const uploadFileId = 'upload-file';
 const saveFileId = 'save-file';
+const renderId = 'render';
 const titleId = 'title';
 const textareaId = 'textarea';
 const fileSelectorId = 'fileLoader';
+const mainDivId = 'main';
 
 const clickEvent = 'click';
 const changeEvent = 'change';
@@ -51,4 +56,6 @@ function bindAllEventListeners() {
   bindEventListenerAsync(fileSelectorId, changeEvent, readFile,
       fileSelectorId, titleId, textareaId);
   bindEventListenerAsync(saveFileId, clickEvent, saveFile, titleId, textareaId);
+  bindEventListener(renderId, clickEvent, renderMarkdown,
+      textareaId, mainDivId, renderId, marked, DOMPurify);
 }

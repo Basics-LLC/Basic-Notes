@@ -1,8 +1,8 @@
 /**
  * @jest-environment jsdom
  */
-import {cleanUp} from '../../../frontend/static/js/js_pwa/text_handlers/cleanUp.js';
-
+import {cleanUp} 
+  from '../../../frontend/static/js/js_pwa/text_handlers/cleanUp.js';
 describe('The value of given elements should be cleared', () => {
   test('Input element value should be cleared', () => {
     document.body.innerHTML =
@@ -18,8 +18,8 @@ describe('The value of given elements should be cleared', () => {
   test('Textarea element value should be cleared', () => {
     document.body.innerHTML =
             '<div>' +
-            '  <textarea id="testarea" value="Enter"></textarea>' +
-            '  <textarea id="testarea2" value="here"></textarea>' +
+            '  <textarea id="testarea">Enter</textarea>' +
+            '  <textarea id="testarea2">Here</textarea>' +
             '</div>';
     cleanUp(['testarea', 'testarea2']);
     expect(document.getElementById('testarea').value).toBe('');
@@ -29,7 +29,7 @@ describe('The value of given elements should be cleared', () => {
   test('Textarea and input element values should be cleared', () => {
     document.body.innerHTML =
             '<div>' +
-            '  <textarea id="testarea" value="Enter"></textarea>' +
+            '  <textarea id="testarea">Name</textarea>' +
             '  <input type="text" id="testTitle2" value="Name">' +
             '</div>';
     cleanUp(['testarea', 'testTitle2']);
