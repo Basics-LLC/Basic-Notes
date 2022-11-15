@@ -4,9 +4,10 @@
   "description": "",
   "main": "main.js",
   "scripts": {
-    "test": "jest",
-    "test_elec": "npx playwright test",
-    "lint": "eslint .  --ext .js",
+    "test_pwa:unit": "jest --testPathPattern=__tests__/tests_pwa",
+    "test_elec:integration": "npx playwright test __tests__/tests_elec --timeout 30000",
+    "lint_pwa": "eslint pwa_register.js server.js serviceWorker.js frontend/static/js/js_pwa/ __tests__/tests_pwa/",
+    "lint_elec": "eslint main.js frontend/static/js/js_electron/ __tests__/tests_elec/",
     "lint-fix": "eslint --fix .  --ext .js",
     "start-elec": "electron-forge start",
     "watch": "nodemon --exec electron .",
@@ -32,11 +33,6 @@
     "express": "^4.18.2",
     "jest-environment-jsdom": "^29.2.2",
     "marked": "^4.2.2"
-  },
-  "jest": {
-    "testPathIgnorePatterns": [
-      "__tests__/tests_elec"
-    ]
   },
   "devDependencies": {
     "@babel/preset-env": "^7.19.4",

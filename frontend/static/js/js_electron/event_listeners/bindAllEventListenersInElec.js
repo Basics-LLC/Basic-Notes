@@ -5,11 +5,11 @@ const {dialog} = remote;
 const path = require('path');
 const fs = require('fs');
 const renderMarkdown = require('../text_handlers/markdown');
-const marked = require('marked')
-const DOMPurify = require('dompurify')
+const marked = require('marked');
+const DOMPurify = require('dompurify');
 
 
-//frontend\static\js\js_electron\text_handlers\markdown.js
+// frontend\static\js\js_electron\text_handlers\markdown.js
 /**
  * Bind all event listeners in Electron app
  */
@@ -22,7 +22,7 @@ function bindAllEventListenersInElec() {
   const noteTitle = document.getElementById('title');
   const renderMarkdownBtn = document.getElementById('render');
 
-  var activeFile ='';
+  let activeFile ='';
 
   // Button Actions
   saveFileBtn.addEventListener('click', async () =>{
@@ -31,8 +31,8 @@ function bindAllEventListenersInElec() {
     if (isFileActive()) {
       fname = getActiveFile();
     } else {
-      let file = await openSaveDialog('');
-      if(file.canceled) {
+      const file = await openSaveDialog('');
+      if (file.canceled) {
         return false;
       }
       fname = file.filePath;
@@ -42,7 +42,7 @@ function bindAllEventListenersInElec() {
   });
 
   renderMarkdownBtn.addEventListener('click', () =>{
-    renderMarkdown('textarea','main','render',marked,DOMPurify)
+    renderMarkdown('textarea', 'main', 'render', marked, DOMPurify);
   });
 
   electron.ipcRenderer.on('open-file', async (event, arg) => {

@@ -1,7 +1,8 @@
 /**
  * @jest-environment jsdom
  */
-import {saveFile} from '../../../frontend/static/js/js_pwa/text_handlers/save.js';
+import {saveFile} from
+  '../../../frontend/static/js/js_pwa/text_handlers/save.js';
 
 describe('Construct and download file according to text', () => {
   window.URL.createObjectURL = jest.fn();

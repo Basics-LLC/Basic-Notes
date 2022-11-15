@@ -1,0 +1,32 @@
+name: CI/CD Pipeline for Electron Version 
+
+on:
+  push:
+    branches:
+      - main
+      - merge-both
+    paths-ignore:
+      - README.md
+      - LICENSE
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [14.x, 15.x, 18.x]
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Install modules
+      run: npm install
+    # - name: Run ESLint
+    #   run: npm run lint_elec
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v3
+      with:
+        node-version: ${{ matrix.node-version }}
+    - run: npm ci
+    - run: npm run build --if-present
+    - run: xvfb-run --auto-servernum --server-args="-screen 0 1280x960x24" -- npm run test_elec:integration --if-present

@@ -1,3 +1,4 @@
-import {bindAllEventListeners} from './event_listeners/bindAllEventListeners.js';
+import {bindAllEventListeners} from
+  './event_listeners/bindAllEventListeners.js';
 
 bindAllEventListeners();
