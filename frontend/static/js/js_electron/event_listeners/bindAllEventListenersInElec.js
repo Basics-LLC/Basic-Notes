@@ -15,7 +15,7 @@ function bindAllEventListenersInElec() {
   const textContent = document.getElementById('textarea');
   const noteTitle = document.getElementById('title');
 
-  const activeFile ='';
+  var activeFile ='';
 
   // Button Actions
   saveFileBtn.addEventListener('click', () =>{
@@ -48,114 +48,114 @@ function bindAllEventListenersInElec() {
     cancelFileEdit();
     return false;
   });
-}
 
-// Compound Functions
 
-function saveFile(filename) {
-  setActiveFile(filename);
-  setCurrentFileName();
-  // showAlertBar(); //Notify about saved file
-}
+  // Compound Functions
 
-function openFile(filename) {
-  setActiveFile(filename);
-  setCurrentFileName();
-  writeFileToTextArea();
-}
-
-function cancelFileEdit() {
-  setActiveFile(undefined);
-  noteTitle.value = '';
-  textContent.value = '';
-}
-
-// //Utililty Functions
-
-function writeFileToTextArea() {
-  const currentFile = getActiveFile();
-  if (validateFile(currentFile)) {
-    const mdData = fs.readFileSync(getActiveFile()).toString();
-    textContent.value = mdData;
+  function saveFile(filename) {
+    setActiveFile(filename);
+    setCurrentFileName();
+    // showAlertBar(); //Notify about saved file
   }
-}
 
-
-function isFileActive() {
-  if (activeFile=== undefined || activeFile ==='') {
-    return false;
+  function openFile(filename) {
+    setActiveFile(filename);
+    setCurrentFileName();
+    writeFileToTextArea();
   }
-  return true;
-}
 
-function getActiveFile() {
-  return activeFile;
-}
+  function cancelFileEdit() {
+    setActiveFile(undefined);
+    noteTitle.value = '';
+    textContent.value = '';
+  }
 
-function createFile(fname) {
-  const content=textContent.value;
-  writeToFile(content, fname).then(function() {
-    saveFile(fname);
-  });
-}
+  // //Utililty Functions
 
-function validateFile(filename) {
-  const ext = path.extname(filename);
-  if (ext === '.md') {
+  function writeFileToTextArea() {
+    const currentFile = getActiveFile();
+    if (validateFile(currentFile)) {
+      const mdData = fs.readFileSync(getActiveFile()).toString();
+      textContent.value = mdData;
+    }
+  }
+
+
+  function isFileActive() {
+    if (activeFile=== undefined || activeFile ==='') {
+      return false;
+    }
     return true;
   }
-  return false;
-}
 
-function setCurrentFileName() {
-  const filename = getActiveFile();
-  noteTitle.value = getFileName(filename);
-}
-
-function openSaveDialog(df) {
-  const filename= dialog.showSaveDialog(
-      {defaultPath: df, properties: ['selectFile']});
-  setActiveFile(filename);
-  return filename;
-}
-
-
-function openSelectFileDialog() {
-  const files = dialog.showOpenDialog(
-      {properties: ['openFile']});
-  const filename = files[0];
-  return filename;
-}
-
-function getFileName(fullPath) {
-  if (fullPath !== undefined) {
-    return fullPath.toString().replace(/^.*[\\\/]/, '');
+  function getActiveFile() {
+    return activeFile;
   }
-}
 
-function addRecentFile(fileName, filePath) {
-  // ***STUB***
-  // TODO: Implement database to fetch recent files
-}
-
-function setActiveFile(filename) {
-  activeFile = filename;
-  const name = getFileName(filename);
-  if (filename !== undefined) {
-    addRecentFile(name, filename);
-  }
-}
-
-async function writeToFile(text, filename) {
-  console.log(filename);
-  if (filename!== undefined && validateFile(filename)) {
-    fs.writeFile(filename, text, function(err) {
-      if (err) {
-        return console.log(err);
-      }
-      return true;
+  function createFile(fname) {
+    const content=textContent.value;
+    writeToFile(content, fname).then(function() {
+      saveFile(fname);
     });
   }
-}
 
+  function validateFile(filename) {
+    const ext = path.extname(filename);
+    if (ext === '.md') {
+      return true;
+    }
+    return false;
+  }
+
+  function setCurrentFileName() {
+    const filename = getActiveFile();
+    noteTitle.value = getFileName(filename);
+  }
+
+  function openSaveDialog(df) {
+    const filename= dialog.showSaveDialog(
+        {defaultPath: df, properties: ['selectFile']});
+    setActiveFile(filename);
+    return filename;
+  }
+
+
+  function openSelectFileDialog() {
+    const files = dialog.showOpenDialog(
+        {properties: ['openFile']});
+    const filename = files[0];
+    return filename;
+  }
+
+  function getFileName(fullPath) {
+    if (fullPath !== undefined) {
+      return fullPath.toString().replace(/^.*[\\\/]/, '');
+    }
+  }
+
+  function addRecentFile(fileName, filePath) {
+    // ***STUB***
+    // TODO: Implement database to fetch recent files
+  }
+
+  function setActiveFile(filename) {
+    activeFile = filename;
+    const name = getFileName(filename);
+    if (filename !== undefined) {
+      addRecentFile(name, filename);
+    }
+  }
+
+  async function writeToFile(text, filename) {
+    console.log(filename);
+    if (filename!== undefined && validateFile(filename)) {
+      fs.writeFile(filename, text, function(err) {
+        if (err) {
+          return console.log(err);
+        }
+        return true;
+      });
+    }
+  }
+}
 module.exports = bindAllEventListenersInElec;
