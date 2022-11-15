@@ -11,8 +11,7 @@ self.addEventListener('install', (event) => {
           'manifest.json', // Manifest file
           'pwa_register.js',
           'frontend/static/css/index.css', // Main CSS file
-          'frontend/static/js/index.js', // Main JS file
-          'frontend/static/js/checkElectron.js',
+          'frontend/static/js/js_pwa/index.js', // Main JS file
           'frontend/static/js/js_pwa/text_handlers/cleanUp.js',
           'frontend/static/js/js_pwa/text_handlers/upload.js',
           'frontend/static/js/js_pwa/text_handlers/save.js',

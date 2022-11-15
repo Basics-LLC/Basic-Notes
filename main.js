@@ -19,7 +19,7 @@ function createWindow() {
   const menu = Menu.buildFromTemplate(menuTemplate);
   Menu.setApplicationMenu(menu);
 
-  mainWindow.loadFile(__dirname + '/index.html');
+  mainWindow.loadFile(__dirname + '/index-elec.html');
 
   mainWindow.on('closed', () => {
     mainWindow = null;
