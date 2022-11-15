@@ -3,7 +3,12 @@ const electron = require('electron');
 const {dialog} = require('electron').remote;
 const path = require('path');
 const fs = require('fs');
+const renderMarkdown = require('../text_handlers/markdown');
+const marked = require('marked')
+const DOMPurify = require('dompurify')
 
+
+//frontend\static\js\js_electron\text_handlers\markdown.js
 /**
  * Bind all event listeners in Electron app
  */
@@ -14,6 +19,7 @@ function bindAllEventListenersInElec() {
   const saveFileBtn = document.getElementById('save-file');
   const textContent = document.getElementById('textarea');
   const noteTitle = document.getElementById('title');
+  const renderMarkdownBtn = document.getElementById('render');
 
   var activeFile ='';
 
@@ -28,6 +34,10 @@ function bindAllEventListenersInElec() {
     }
     createFile(fname);
     return false;
+  });
+
+  renderMarkdownBtn.addEventListener('click', () =>{
+    renderMarkdown('textarea','main','render',marked,DOMPurify)
   });
 
   electron.ipcRenderer.on('open-file', (event, arg) => {
