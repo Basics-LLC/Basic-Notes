@@ -1,4 +1,6 @@
 const {app, BrowserWindow, Menu} = require('electron');
+const remoteMain = require('@electron/remote/main');
+remoteMain.initialize();
 
 let mainWindow;
 
@@ -11,8 +13,9 @@ function createWindow() {
       enableRemoteModule: true,
     },
   });
+  remoteMain.enable(mainWindow.webContents);
   // Open the dev tools
-  // mainWindow.webContents.openDevTools()
+  // mainWindow.webContents.openDevTools();
 
   // Create Menu
   menuTemplate = require('./frontend/static/js/js_electron/menu.js')(mainWindow);

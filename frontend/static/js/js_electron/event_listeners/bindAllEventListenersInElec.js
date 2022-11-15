@@ -1,6 +1,7 @@
 const {contextBridge, ipcRenderer} = require('electron');
 const electron = require('electron');
-const {dialog} = require('electron').remote;
+const remote = require('@electron/remote');
+const {dialog} = remote;
 const path = require('path');
 const fs = require('fs');
 
@@ -18,20 +19,24 @@ function bindAllEventListenersInElec() {
   var activeFile ='';
 
   // Button Actions
-  saveFileBtn.addEventListener('click', () =>{
+  saveFileBtn.addEventListener('click', async () =>{
     let fname = '';
     const content=textContent.value;
     if (isFileActive()) {
       fname = getActiveFile();
     } else {
-      fname = openSaveDialog('');
+      let file = await openSaveDialog('');
+      if(file.canceled) {
+        return false;
+      }
+      fname = file.filePath;
     }
     createFile(fname);
     return false;
   });
 
-  electron.ipcRenderer.on('open-file', (event, arg) => {
-    const filename = openSelectFileDialog();
+  electron.ipcRenderer.on('open-file', async (event, arg) => {
+    const filename = await openSelectFileDialog();
     openFile(filename);
   });
 
@@ -39,8 +44,8 @@ function bindAllEventListenersInElec() {
     cancelFileEdit();
   });
 
-  uploadFileBtn.addEventListener('click', () =>{
-    const filename = openSelectFileDialog();
+  uploadFileBtn.addEventListener('click', async () =>{
+    const filename = await openSelectFileDialog();
     openFile(filename);
   });
 
@@ -113,17 +118,17 @@ function bindAllEventListenersInElec() {
   }
 
   function openSaveDialog(df) {
-    const filename= dialog.showSaveDialog(
+    const file = dialog.showSaveDialog(
         {defaultPath: df, properties: ['selectFile']});
-    setActiveFile(filename);
-    return filename;
+    setActiveFile(file.filePath);
+    return file;
   }
 
 
-  function openSelectFileDialog() {
-    const files = dialog.showOpenDialog(
+  async function openSelectFileDialog() {
+    const result = await dialog.showOpenDialog(
         {properties: ['openFile']});
-    const filename = files[0];
+    const filename = result.filePaths[0];
     return filename;
   }
 
@@ -146,10 +151,9 @@ function bindAllEventListenersInElec() {
     }
   }
 
-  async function writeToFile(text, filename) {
-    console.log(filename);
-    if (filename!== undefined && validateFile(filename)) {
-      fs.writeFile(filename, text, function(err) {
+  async function writeToFile(text, filePath) {
+    if (filePath!== undefined && validateFile(filePath)) {
+      fs.writeFile(filePath, text, function(err) {
         if (err) {
           return console.log(err);
         }
