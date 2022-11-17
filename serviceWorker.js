@@ -20,7 +20,7 @@ self.addEventListener('install', (event) => {
           'frontend/static/js/js_pwa/event_listeners/bindAllEventListeners.js',
           'frontend/static/images/apple-touch-icon-144x144.png',
           'https://cdn.jsdelivr.net/npm/marked/marked.min.js',
-          'https://cdn.jsdelivr.net/npm/dompurify@2.4.1/dist/purify.min.js'
+          'https://cdn.jsdelivr.net/npm/dompurify@2.4.1/dist/purify.min.js',
         ]);
       }),
   );
