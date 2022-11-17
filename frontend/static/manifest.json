@@ -3,7 +3,7 @@
 	"name": "Basic Notes PWA",
 	"short_name": "Basic Notes PWA",
 	"display": "standalone",
-	"start_url": "./?utm_source=pwa_install",
+	"start_url": "./",
 	"scope": ".",
 	"theme_color": "#000",
 	"background_color": "#000",

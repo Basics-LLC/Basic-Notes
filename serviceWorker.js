@@ -7,18 +7,18 @@ self.addEventListener('install', (event) => {
   event.waitUntil(
       caches.open(cacheName).then((cache) => {
         return cache.addAll([
-          '/',
-          'index.html', // Main HTML file
-          'manifest.json', // Manifest file
-          'pwa_register.js',
-          'frontend/static/css/index.css', // Main CSS file
-          'frontend/static/js/js_pwa/index.js', // Main JS file
-          'frontend/static/js/js_pwa/text_handlers/cleanUp.js',
-          'frontend/static/js/js_pwa/text_handlers/upload.js',
-          'frontend/static/js/js_pwa/text_handlers/save.js',
-          'frontend/static/js/js_pwa/text_handlers/markdown.js',
-          'frontend/static/js/js_pwa/event_listeners/bindAllEventListeners.js',
-          'frontend/static/images/apple-touch-icon-144x144.png',
+          './',
+          './index.html', // Main HTML file
+          './manifest.json', // Manifest file
+          './pwa_register.js',
+          './frontend/static/css/index.css', // Main CSS file
+          './frontend/static/js/js_pwa/index.js', // Main JS file
+          './frontend/static/js/js_pwa/text_handlers/cleanUp.js',
+          './frontend/static/js/js_pwa/text_handlers/upload.js',
+          './frontend/static/js/js_pwa/text_handlers/save.js',
+          './frontend/static/js/js_pwa/text_handlers/markdown.js',
+          './frontend/static/js/js_pwa/event_listeners/bindAllEventListeners.js',
+          './frontend/static/images/apple-touch-icon-144x144.png',
           'https://cdn.jsdelivr.net/npm/marked/marked.min.js',
           'https://cdn.jsdelivr.net/npm/dompurify@2.4.1/dist/purify.min.js',
         ]);
