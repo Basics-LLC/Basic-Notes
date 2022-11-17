@@ -8,7 +8,7 @@
     "test_elec:integration": "npx playwright test __tests__/tests_elec --timeout 30000",
     "lint_pwa": "eslint pwa_register.js server.js serviceWorker.js frontend/static/js/js_pwa/ __tests__/tests_pwa/",
     "lint_elec": "eslint main.js frontend/static/js/js_electron/ __tests__/tests_elec/",
-    "lint-fix": "eslint --fix .  --ext .js",
+    "lint-fix": "eslint --fix .  --ext .js --ignore-pattern frontend/static/js/third_party/",
     "start-elec": "electron-forge start",
     "watch": "nodemon --exec electron .",
     "reset": "git reset --hard",
@@ -28,11 +28,13 @@
   "homepage": "https://github.com/Basics-LLC/Basice-Notes#readme",
   "dependencies": {
     "@electron/remote": "^2.0.8",
+    "codemirror": "^6.0.1",
     "dompurify": "^2.4.1",
     "electron-squirrel-startup": "^1.0.0",
     "express": "^4.18.2",
     "jest-environment-jsdom": "^29.2.2",
-    "marked": "^4.2.2"
+    "marked": "^4.2.2",
+    "simplemde": "^1.11.2"
   },
   "devDependencies": {
     "@babel/preset-env": "^7.19.4",

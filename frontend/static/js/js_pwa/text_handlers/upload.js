@@ -41,29 +41,24 @@ function readFileName(file) {
  * Read the selected file.
  * @param {string} fileSelectorId The if of the file selector.
  * @param {string} titleId The id of the input element of title.
- * @param {string} textareaId The if of the textarea element.
+ * @param {Object} simplemde The markdown editor object.
  */
-async function readFile(fileSelectorId, titleId, textareaId) {
+async function readFile(fileSelectorId, titleId, simplemde) {
   const file = document.getElementById(fileSelectorId).files[0];
   const title = readFileName(file);
   const text = await readFileContent(file);
-  onFileReadListener([titleId, textareaId], [title, text]);
+  onFileReadListener(titleId, title, text, simplemde);
 }
 
 /**
  * Fill the value of element found by each given id
  * with each given content.
- * @param {list} ids The list of elements ids to be matched.
- * @param {list} contents The list of contents of relevant elements.
+ * @param {string} titleId The id of the title element
+ * @param {string} title The title of the read file.
+ * @param {string} contents The content of the read file.
+ * @param {Object} simplemde The markdown editor object.
  */
-function onFileReadListener(ids, contents) {
-  if (ids.length !== contents.length) {
-    throw new Error(
-        'The length of id is different from the length of contents');
-  }
-  for (let i=0; i<ids.length; i++) {
-    const id = ids[i];
-    const content = contents[i];
-    document.getElementById(id).value = content;
-  }
+function onFileReadListener(titleId, title, contents, simplemde) {
+  document.getElementById(titleId).value = title;
+  simplemde.value(contents);
 }

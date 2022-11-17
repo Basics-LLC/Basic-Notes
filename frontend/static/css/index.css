@@ -6,6 +6,7 @@ body {
     font-family: 'Quicksand', sans-serif;
     font-size: 18px;
     height: 100%;
+    min-height: 800px;
     width: 80%;
     max-width: 80%;
     margin-left: auto;
@@ -58,12 +59,6 @@ a {
     width: 20%;
 }
 
-#render {
-    float: right;
-    height: 30px;
-    width: 150px;
-}
-
 #textarea {
     resize: none;
     height: 90%;
@@ -76,9 +71,13 @@ a {
     display: block;
 }
 
+.CodeMirror {
+	height: 80%;
+}
+
 #button-group {
     display: flex;
-    height: 20%;
+    position: relative;
     width: 100%;
     max-width: 100%;
 }
@@ -86,6 +85,7 @@ a {
 .button {
     flex: 1;
     height: 45px;
+    position: relative;
     text-align: left;
     width: 100%;
     max-width: 100%;
