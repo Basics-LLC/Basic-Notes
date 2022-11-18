@@ -35,6 +35,7 @@ jobs:
     - run: npm ci
     - run: npm run build --if-present
     - run: npm run test_pwa:unit
+    - run: xvfb-run --auto-servernum --server-args="-screen 0 1600x1200x24" -- npm run test_pwa:integration --if-present
 
   pack:
     needs: build
