@@ -3,9 +3,12 @@ const fs = require('fs');
 
 test('Upload File', async ({page}) => {
   await page.goto('./');
-  await page.locator('#upload-file').click();
-  await page.locator('#fileLoader')
-      .setInputFiles('./__tests__/tests_pwa/integration_tests/test.md');
+  const [fileChooser] = await Promise.all([
+    page.waitForEvent('filechooser'),
+    page.locator('#upload-file').click(),
+  ]);
+  await fileChooser
+      .setFiles('./__tests__/tests_pwa/integration_tests/test.md');
   await page.setViewportSize({width: 1600, height: 1200});
   await expect(page).toHaveScreenshot();
 });
