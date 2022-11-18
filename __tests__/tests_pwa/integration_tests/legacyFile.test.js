@@ -38,3 +38,13 @@ test('Download File', async ({page}) => {
   const testBuf = fs.readFileSync(filePath);
   expect(originalBuf.equals(testBuf));
 });
+
+test('Clear Content', async ({page}) => {
+  await page.goto('./');
+  await page.locator('#upload-file').click();
+  await page.locator('#fileLoader')
+      .setInputFiles('./__tests__/tests_pwa/integration_tests/test.md');
+  await page.locator('#new-file').click();
+  await page.setViewportSize({width: 1600, height: 1200});
+  await expect(page).toHaveScreenshot();
+});
