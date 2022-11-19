@@ -8,7 +8,7 @@ const app = {
   active_file: null,
   dir_handle: null,
   new_files: [],
-}
+};
 
 const simplemde = new SimpleMDEClass();
 bindAllEventListeners();

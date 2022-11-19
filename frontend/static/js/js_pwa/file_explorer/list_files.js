@@ -1,13 +1,15 @@
-import { generate_handler_info } from "./file_access_helper.js";
+import {generateHandlerInfo} from './file_access_helper.js';
 
-async function list_files() {
-    let listElement = document.getElementById("directory-files");
-    dirInfo = await generate_handler_info();
+/**
+ * Waiting for @Harshit to add
+ */
+async function listFiles() {
+  const listElement = document.getElementById('directory-files');
+  dirInfo = await generateHandlerInfo();
 
-    dirInfo.file_handles.forEach(fileHandleDir => {
-        let child = document.createElement("li");
-        child.innerHTML = fileHandleDir.name;
-        listElement.append(child);
-    });
-
+  dirInfo.file_handles.forEach((fileHandleDir) => {
+    const child = document.createElement('li');
+    child.innerHTML = fileHandleDir.name;
+    listElement.append(child);
+  });
 }

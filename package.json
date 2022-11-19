@@ -9,7 +9,7 @@
     "test_elec:integration": "npx playwright test __tests__/tests_elec --timeout 30000",
     "lint_pwa": "eslint pwa_register.js server.js serviceWorker.js frontend/static/js/js_pwa/ __tests__/tests_pwa/",
     "lint_elec": "eslint main.js frontend/static/js/js_electron/ __tests__/tests_elec/",
-    "lint-fix": "eslint --fix .  --ext .js --ignore-pattern frontend/static/js/third_party/",
+    "lint-fix": "eslint --fix .  --ext .js --ignore-pattern frontend/static/js/third_party/ --ignore-pattern jsdoc/",
     "start-elec": "electron-forge start",
     "watch": "nodemon --exec electron .",
     "reset": "git reset --hard",
