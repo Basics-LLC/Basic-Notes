@@ -39,7 +39,7 @@ async function generate_handler_info() {
     }
     handle_info.handle = await openFilePicker();
     handle_info.file_handles = await getAllFilesFromDirectoryHandle(handle_info.handle);
-    return handle_info;
+    return await handle_info;
 }
 
 function dummy(k) {
