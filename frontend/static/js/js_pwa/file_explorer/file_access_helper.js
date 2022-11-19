@@ -1,11 +1,8 @@
-// access the direcotry
-// create the tree
-// 
-// active file handler object
-// tree 
-
 export {getFilesRecursively, dummy, generate_handler_info}
 
+/*
+  * Returns the files in the Directory Handle entry point
+ */
 async function* getFilesRecursively (entry) {
     if (entry.kind === 'file') {
         const file = await entry.getFile();
@@ -20,6 +17,9 @@ async function* getFilesRecursively (entry) {
     }
 }
 
+/*
+  * Returns the files in the Directory Handle
+ */
 async function getAllFilesFromDirectoryHandle(directoryHandle) {
     let allFiles = [];
     for await (const fileHandleDir of getFilesRecursively(directoryHandle)) {
@@ -27,11 +27,18 @@ async function getAllFilesFromDirectoryHandle(directoryHandle) {
     }
     return allFiles;
 }
-    
+
+/*
+  * Opens the file picker and returns the selected directory handle
+ */
 async function openFilePicker() {
     fileHandle = await window.showDirectoryPicker();
     return fileHandle
 }
+
+/*
+  * generate the handler info for the app
+ */
 async function generate_handler_info() {
     const handle_info = {
         handle: null,
@@ -40,9 +47,4 @@ async function generate_handler_info() {
     handle_info.handle = await openFilePicker();
     handle_info.file_handles = await getAllFilesFromDirectoryHandle(handle_info.handle);
     return await handle_info;
-}
-
-function dummy(k) {
-    if (k==1) {return [];}
-    return ["dummy_file.txt", "dummy_file_2.txt"];
 }
