@@ -1,16 +1,15 @@
-function write_to_file(flHandle) {
-    return null;
+async function write_to_file(dHandel, flHandle, contents) {
+    fileHandle = await dHandel.getFileHandle(flHandle.name);
+    const writable = await fileHandle.createWritable();
+    await writable.write(contents);
+    await writable.close();
 }
 
 async function read_from_file(flHandle) {
     
-    reader = await fl.stream().getReader();
+    reader = await flHandle.stream().getReader();
     data = await reader.read().then(console.log("READ DATA"));
     return new TextDecoder().decode(data.value);
+    // run repopulate list function
 
 }
-
-
-async function saveFile(flHandle) {
-
-} 
