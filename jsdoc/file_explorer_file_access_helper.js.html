@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: text_handlers/upload.js</title>
+    <title>JSDoc: Source: file_explorer/file_access_helper.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: text_handlers/upload.js</h1>
+    <h1 class="page-title">Source: file_explorer/file_access_helper.js</h1>
 
     
 
@@ -26,69 +26,61 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>export {openFileDialog, readFile, onFileReadListener};
+            <pre class="prettyprint source linenums"><code>export {getFilesRecursively, generateHandlerInfo};
 
 /**
- * Once this function has been called, it will simulate
- * the action of clicking the choose file button.
- * @param {string} elementId The id of the file upload button.
+ * Returns the files in the Directory Handle entry point
+ * @param {*} entry Waiting for @Harshit to add
  */
-function openFileDialog(elementId) {
-  document.getElementById(elementId).click();
+async function* getFilesRecursively(entry) {
+  if (entry.kind === 'file') {
+    const file = await entry.getFile();
+    if (file !== null) {
+      // file.relativePath = getRelativePath(entry);
+      yield file;
+    }
+  } else if (entry.kind === 'directory') {
+    for await (const handle of entry.values()) {
+      yield* getFilesRecursively(handle);
+    }
+  }
 }
 
 /**
- * Read the contents of the given file.
- * @param {File} file The file object to be read.
- * @return {Promise} A promise of file contents.
+ * Returns the files in the Directory Handle
+ * @param {*} directoryHandle Waiting for @Harshit to add
+ * @return {*} Waiting for @Harshit to add
  */
-async function readFileContent(file) {
-  const reader = new FileReader();
-  return new Promise((resolve, reject) => {
-    reader.readAsText(file);
-    reader.onerror = () => {
-      reader.abort();
-      reject(new DOMException('Problem parsing input file.'));
-    };
-    reader.onload = () => {
-      resolve(reader.result);
-    };
-  });
+async function getAllFilesFromDirectoryHandle(directoryHandle) {
+  const allFiles = [];
+  for await (const fileHandleDir of getFilesRecursively(directoryHandle)) {
+    allFiles.push(fileHandleDir);
+  }
+  return allFiles;
 }
 
 /**
- * Read the name of the given file.
- * @param {File} file The file object to be read.
- * @return {string} The name of the file.
+ * Opens the file picker and returns the selected directory handle
+ * @return {*} Waiting for @Harshit to add
  */
-function readFileName(file) {
-  return file.name;
+async function openFilePicker() {
+  fileHandle = await window.showDirectoryPicker();
+  return fileHandle;
 }
 
 /**
- * Read the selected file.
- * @param {string} fileSelectorId The if of the file selector.
- * @param {string} titleId The id of the input element of title.
- * @param {Object} simplemde The markdown editor object.
+ * generate the handler info for the app
+ * @return {*} Waiting for @Harshit to add
  */
-async function readFile(fileSelectorId, titleId, simplemde) {
-  const file = document.getElementById(fileSelectorId).files[0];
-  const title = readFileName(file);
-  const text = await readFileContent(file);
-  onFileReadListener(titleId, title, text, simplemde);
-}
-
-/**
- * Fill the value of element found by each given id
- * with each given content.
- * @param {string} titleId The id of the title element
- * @param {string} title The title of the read file.
- * @param {string} contents The content of the read file.
- * @param {Object} simplemde The markdown editor object.
- */
-function onFileReadListener(titleId, title, contents, simplemde) {
-  document.getElementById(titleId).value = title;
-  simplemde.value(contents);
+async function generateHandlerInfo() {
+  const handleInfo = {
+    handle: null,
+    file_handles: [],
+  };
+  handleInfo.handle = await openFilePicker();
+  handleInfo.file_handles =
+    await getAllFilesFromDirectoryHandle(handleInfo.handle);
+  return await handleInfo;
 }
 </code></pre>
         </article>

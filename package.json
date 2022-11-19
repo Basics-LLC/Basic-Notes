@@ -15,7 +15,8 @@
     "reset": "git reset --hard",
     "package": "electron-forge package",
     "make": "electron-forge make",
-    "jsdoc:pwa": "./node_modules/.bin/jsdoc -c jsdoc.pwa.json"
+    "jsdoc:pwa": "./node_modules/.bin/jsdoc -c jsdoc.pwa.json",
+    "presubmit:pwa": "npm run lint_pwa && npm run test_pwa:unit && npm run test_pwa:integration && npm run jsdoc:pwa"
   },
   "repository": {
     "type": "git",
