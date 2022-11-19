@@ -22,6 +22,8 @@ self.addEventListener('install', (event) => {
           './frontend/static/js/js_pwa/event_listeners' +
           '/bindAllEventListeners.js',
           './frontend/static/images/apple-touch-icon-144x144.png',
+          './frontend/static/js/js_pwa/file_explorer/file_access_helper.js',
+          './frontend/static/js/js_pwa/file_explorer/list_files.js'
         ]);
       }),
   );
