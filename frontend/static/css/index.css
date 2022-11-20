@@ -13,38 +13,16 @@ body {
     margin-right: auto;
 }
 
-/* Creates a full-height, left-mounted navigation menu */
-.nav {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: var(--nav-width);
-    height: 100vh;
-    background: #222222;
+/* The 'dcode' green always needs to make an appearance */
+a {
+    color: #009579;
 }
 
-/* Making these look fantastic */
-.nav__link {
-    display: block;
-    padding: 12px 18px;
-    text-decoration: none;
-    color: #eeeeee;
-    font-weight: 500;
-}
-
-.nav__link:hover {
-    background: rgba(255, 255, 255, 0.05);
-}
 
 #app {
     margin: 2em;
     line-height: 1.5;
     font-weight: 500;
-}
-
-/* The 'dcode' green always needs to make an appearance */
-a {
-    color: #009579;
 }
 
 #main {
@@ -87,10 +65,37 @@ a {
     display: block;
 }
 
+#fileLoader {
+    display: none;
+}
+
+
+/* Creates a full-height, left-mounted navigation menu */
+.nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: var(--nav-width);
+    height: 100vh;
+    background: #222222;
+}
+
+/* Making these look fantastic */
+.nav__link {
+    display: block;
+    padding: 12px 18px;
+    text-decoration: none;
+    color: #eeeeee;
+    font-weight: 500;
+}
+
+.nav__link:hover {
+    background: rgba(255, 255, 255, 0.05);
+}
+
 .CodeMirror {
     height: 80%;
 }
-
 
 .button {
     flex: 1;
@@ -120,8 +125,21 @@ a {
     background-color: rgba(144, 144, 144, 0.085);
 }
 
-#fileLoader {
-    display: none;
+.footer {
+    background-color:#e5e5e5;
+    padding:10px;
+    text-align:center;
+    margin-top:20px;
+    font-size: 0.5em;
+    font-weight: 300;
+    height: 2.75em;
+    letter-spacing: 0.125em;
+    line-height: 2.75em;
+    padding: 0 2em;
+    text-align: center;
+    text-decoration: none;
+    text-indent: 0.125em;
+    white-space: nowrap;
 }
 
 
@@ -131,5 +149,3 @@ a {
     width: 100%;
     margin: 10px 0 0 0;
 }
-
-
