@@ -45,6 +45,10 @@ function readFileName(file) {
  */
 async function readFile(fileSelectorId, titleId, simplemde) {
   const file = document.getElementById(fileSelectorId).files[0];
+  if (file == null) {
+    return;
+  }
+  document.getElementById(fileSelectorId).value = null;
   const title = readFileName(file);
   const text = await readFileContent(file);
   onFileReadListener(titleId, title, text, simplemde);
