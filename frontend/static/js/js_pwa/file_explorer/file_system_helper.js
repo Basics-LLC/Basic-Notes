@@ -1,3 +1,6 @@
+import {listFiles} from "./list_files.js"
+import {app} from "../index.js"
+
 /**
  * Function to write the file
  * @param {*} dHandel Waiting for @Harshit to add
@@ -22,4 +25,14 @@ async function readFromFile(flHandle) {
   data = await reader.read().then(console.log('READ DATA'));
   return new TextDecoder().decode(data.value);
   // run repopulate list function
+}
+
+/**
+ * Function to create new file
+ * @return {newHandle} file handle of the new file created
+ */
+async function createNewFile() {
+  let newHandle = await window.showSaveFilePicker();
+  listFiles(app.dir_handle);
+  return newHandle;
 }

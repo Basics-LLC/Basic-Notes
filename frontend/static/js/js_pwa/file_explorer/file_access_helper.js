@@ -1,4 +1,5 @@
 export {getFilesRecursively, generateHandlerInfo};
+import {app} from "../index.js"
 
 /**
  * Returns the files in the Directory Handle entry point
@@ -44,13 +45,19 @@ async function openFilePicker() {
  * generate the handler info for the app
  * @return {*} Waiting for @Harshit to add
  */
-async function generateHandlerInfo() {
+async function generateHandlerInfo(dHandel=null) {
   const handleInfo = {
     handle: null,
     file_handles: [],
   };
-  handleInfo.handle = await openFilePicker();
+  if (!dHandel) {
+    handleInfo.handle = await openFilePicker();
+  } else {
+    handleInfo.handle = dHandel;
+  }
   handleInfo.file_handles =
     await getAllFilesFromDirectoryHandle(handleInfo.handle);
+  app.dir_handle = await handleInfo.handle;
+  app.file_handles = await handleInfo.file_handles;
   return await handleInfo;
 }
