@@ -3,34 +3,7 @@
  */
 import {saveFile} from
   '../../../frontend/static/js/js_pwa/text_handlers/save.js';
-
-/**
- * This class is used to mock SimpleMDE.
- */
-class SimpleMDEMock {
-  /**
-   * Constructor
-   */
-  constructor() {
-    this.content = '';
-  };
-
-  /**
-   * return the editor content.
-   * @return {string} content.
-   */
-  value = () => {
-    return this.content;
-  };
-
-  /**
-   * Set the content of the editor.
-   * @param {string} text to be written to the editor.
-   */
-  setValue = (text) => {
-    this.content = text;
-  };
-}
+import {SimpleMDEMock} from '../../mocks/mocks.js';
 
 describe('Construct and download file according to text', () => {
   window.URL.createObjectURL = jest.fn();

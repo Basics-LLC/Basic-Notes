@@ -21,7 +21,7 @@ async function saveFile(titleId, simplemde) {
   if (title === '') {
     title = 'new-file.md';
   }
-  const text = simplemde.value();
+  const text = simplemde.getValue();
   const link = document.createElement('a');
   link.download = title;
   const file = constructFile(title, text);

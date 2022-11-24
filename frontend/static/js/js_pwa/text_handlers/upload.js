@@ -64,5 +64,5 @@ async function readFile(fileSelectorId, titleId, simplemde) {
  */
 function onFileReadListener(titleId, title, contents, simplemde) {
   document.getElementById(titleId).value = title;
-  simplemde.value(contents);
+  simplemde.setValue(contents);
 }

@@ -3,34 +3,7 @@
  */
 import {onFileReadListener} from
   '../../../frontend/static/js/js_pwa/text_handlers/upload.js';
-
-/**
- * This class is used to mock SimpleMDE.
- */
-class SimpleMDEMock {
-  /**
-   * Constructor
-   */
-  constructor() {
-    this.content = '';
-  };
-
-  /**
-   * return the editor content.
-   * @return {string} content.
-   */
-  getValue = () => {
-    return this.content;
-  };
-
-  /**
-   * Set the content of the editor.
-   * @param {string} text to be written to the editor.
-   */
-  value = (text) => {
-    this.content = text;
-  };
-}
+import {SimpleMDEMock} from '../../mocks/mocks.js';
 
 describe('The file contents should be properly processed', () => {
   test('Fill a regular file', async () => {

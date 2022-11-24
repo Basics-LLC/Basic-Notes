@@ -1,5 +1,5 @@
-import {listFiles} from "./list_files.js"
-import {app} from "../index.js"
+import {listFiles} from './list_files.js';
+import {app} from '../index.js';
 
 /**
  * Function to write the file
@@ -32,7 +32,7 @@ async function readFromFile(flHandle) {
  * @return {newHandle} file handle of the new file created
  */
 async function createNewFile() {
-  let newHandle = await window.showSaveFilePicker();
+  const newHandle = await window.showSaveFilePicker();
   listFiles(app.dir_handle);
   return newHandle;
 }

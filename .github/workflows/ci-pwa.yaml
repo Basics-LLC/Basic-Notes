@@ -27,7 +27,7 @@ jobs:
     - name: Install modules
       run: npm install
     - name: Run ESLint
-      run: npm run lint_pwa
+      run: npm run lint:pwa
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v3
       with:
