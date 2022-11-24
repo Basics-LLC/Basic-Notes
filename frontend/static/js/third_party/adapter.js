@@ -1,7 +1,6 @@
 export {SimpleMDEClass};
 import './simplemde.js';
 
-// const SimpleMDEClass = SimpleMDE;
 class SimpleMDEClass {
     constructor() {
         this.editor = new SimpleMDE();
