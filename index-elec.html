@@ -4,15 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Basic Notes</title>
+    <link rel="stylesheet" href="frontend/static/css/third_party/simplemde.css">
     <link rel="stylesheet" href="frontend/static/css/index.css">
-
 </head>
 <body>
     <div id="main">
         <input type="text" id="title" placeholder="Name of Note" />
-        <button type="button" id="render">Markdown!</button>
         <br>
         <textarea id="textarea" placeholder="Enter text here"></textarea>
+    </div>
+
+    <div id="wrapper" >
+    <ul id="recent-files"></ul>
+    <ul id="current-dir-files"></ul>
     </div>
     <input type="file" id="fileLoader" name="files" title="Load File" accept=".txt, .md" />
     <div id="button-group">

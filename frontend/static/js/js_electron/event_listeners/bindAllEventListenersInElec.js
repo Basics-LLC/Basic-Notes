@@ -7,6 +7,14 @@ const fs = require('fs');
 const renderMarkdown = require('../text_handlers/markdown');
 const marked = require('marked');
 const DOMPurify = require('dompurify');
+const SimpleMDEClass = require("../../third_party/simplemde");
+const low = require('lowdb')
+const FileSync = require('lowdb/adapters/FileSync')
+const adapter = new FileSync('basics_db.json')
+const db = low(adapter)
+
+db.defaults({ files: [], count: 0 })
+  .write()
 
 
 // frontend\static\js\js_electron\text_handlers\markdown.js
@@ -18,20 +26,25 @@ function bindAllEventListenersInElec() {
   const newFileBtn = document.getElementById('new-file');
   const uploadFileBtn = document.getElementById('upload-file');
   const saveFileBtn = document.getElementById('save-file');
-  const textContent = document.getElementById('textarea');
+  var simplemde = new SimpleMDEClass({ element: document.getElementById("textarea") });
   const noteTitle = document.getElementById('title');
-  const renderMarkdownBtn = document.getElementById('render');
+  let recentFiles = document.getElementById('recent-files');
+  let currDirFiles = document.getElementById('current-dir-files');
+  
 
   let activeFile ='';
+  getRecentFiles();
 
   // Button Actions
   saveFileBtn.addEventListener('click', async () =>{
     let fname = '';
-    const content=textContent.value;
+    var content=simplemde.value();
     if (isFileActive()) {
       fname = getActiveFile();
     } else {
-      const file = await openSaveDialog('');
+      var fileName = noteTitle.value
+      console.log(fileName);
+      const file = await openSaveDialog(fileName);
       if (file.canceled) {
         return false;
       }
@@ -41,22 +54,28 @@ function bindAllEventListenersInElec() {
     return false;
   });
 
-  renderMarkdownBtn.addEventListener('click', () =>{
-    renderMarkdown('textarea', 'main', 'render', marked, DOMPurify);
-  });
 
   electron.ipcRenderer.on('open-file', async (event, arg) => {
     const filename = await openSelectFileDialog();
     openFile(filename);
+    getCurrentDirFiles();
+    getRecentFiles();
   });
 
   electron.ipcRenderer.on('new-file', (event, arg) => {
     cancelFileEdit();
   });
 
+  electron.ipcRenderer.on('clear-recents', (event, arg) => {
+    removeAllRecentFiles();
+    getRecentFiles();
+  });
+
   uploadFileBtn.addEventListener('click', async () =>{
     const filename = await openSelectFileDialog();
     openFile(filename);
+    getCurrentDirFiles();
+    getRecentFiles();
   });
 
   newFileBtn.addEventListener('click', () =>{
@@ -64,12 +83,30 @@ function bindAllEventListenersInElec() {
     return false;
   });
 
+  document.getElementById("wrapper").addEventListener("click",function(e){
+    if(e.target.classList.contains('recent-file'))
+    {
+      var el = e.target;
+      var path = el.getAttribute('data-path');
+      openFile(path);
+      return false;
+    }
+    else if (e.target.classList.contains('curr-dir-file'))
+    {
+      var el = e.target;
+      var path = el.getAttribute('data-path');
+      console.log(path);
+      openFile(path);
+      return false;
+    }
+  });
 
   // Compound Functions
 
   function saveFile(filename) {
     setActiveFile(filename);
     setCurrentFileName();
+    getCurrentDirFiles();
     // showAlertBar(); //Notify about saved file
   }
 
@@ -77,12 +114,14 @@ function bindAllEventListenersInElec() {
     setActiveFile(filename);
     setCurrentFileName();
     writeFileToTextArea();
+    getCurrentDirFiles();
+    getRecentFiles();
   }
 
   function cancelFileEdit() {
     setActiveFile(undefined);
     noteTitle.value = '';
-    textContent.value = '';
+    simplemde.value("");
   }
 
   // //Utililty Functions
@@ -91,7 +130,7 @@ function bindAllEventListenersInElec() {
     const currentFile = getActiveFile();
     if (validateFile(currentFile)) {
       const mdData = fs.readFileSync(getActiveFile()).toString();
-      textContent.value = mdData;
+      simplemde.value(mdData);
     }
   }
 
@@ -108,7 +147,7 @@ function bindAllEventListenersInElec() {
   }
 
   function createFile(fname) {
-    const content=textContent.value;
+    var content=simplemde.value();
     writeToFile(content, fname).then(function() {
       saveFile(fname);
     });
@@ -116,7 +155,7 @@ function bindAllEventListenersInElec() {
 
   function validateFile(filename) {
     const ext = path.extname(filename);
-    if (ext === '.md') {
+    if (ext === '.md' || ext == '.txt') {
       return true;
     }
     return false;
@@ -129,7 +168,7 @@ function bindAllEventListenersInElec() {
 
   function openSaveDialog(df) {
     const file = dialog.showSaveDialog(
-        {defaultPath: df, properties: ['selectFile']});
+        { title: "Save Note", defaultPath: df, properties: ['selectFile'], filters: [{ name: 'Markdown file', extensions: ['md'] }]});
     setActiveFile(file.filePath);
     return file;
   }
@@ -137,7 +176,7 @@ function bindAllEventListenersInElec() {
 
   async function openSelectFileDialog() {
     const result = await dialog.showOpenDialog(
-        {properties: ['openFile']});
+        {title: "Open Note", properties: ['openFile']});
     const filename = result.filePaths[0];
     return filename;
   }
@@ -149,8 +188,11 @@ function bindAllEventListenersInElec() {
   }
 
   function addRecentFile(fileName, filePath) {
-    // ***STUB***
-    // TODO: Implement database to fetch recent files
+    if(!recentFileExists(fileName)){
+      db.get('files')
+      .push({ name: fileName, path: filePath})
+      .write()
+  }
   }
 
   function setActiveFile(filename) {
@@ -160,6 +202,93 @@ function bindAllEventListenersInElec() {
       addRecentFile(name, filename);
     }
   }
+
+  function recentFileExists(recentFileName){
+    var count = db.get('files')
+        .find({ name: recentFileName })
+        .size()
+        .value();
+    if(count > 0 ){
+        return true;
+    }
+    return false;
+}
+
+function getRecentFiles(){
+  var files = db.get('files').value("files");
+  var htmlView = createRecentFilesView(files);
+  recentFiles.innerHTML = '';
+  recentFiles.innerHTML = htmlView;
+}
+
+function getCurrentDirFiles(){
+  if(isFileActive())
+  {
+    const filename = getActiveFile();
+    var dirPath = path.dirname(filename)
+    var filePaths = {};
+    fs.readdir(dirPath,(err, files) => {
+      for (var i = 0; i < files.length; i++) {
+        var fp = files[i];
+        if(fp.split('.').pop() == "md" || fp.split('.').pop() == "txt")
+        {
+          filePaths[fp] = dirPath + "\\" + fp;
+        }
+        
+    }
+    var htmlView = createCurrentDirFilesView(filePaths);
+    currDirFiles.innerHTML = '';
+    currDirFiles.innerHTML = htmlView;
+    })
+  }
+}
+
+function createRecentFilesView(data){
+  var template = `<li>
+      <a class="recent-file" data-path="{location}" href="javascript:void(0)">{name}</a>
+  </li>`;
+  var output =`<li class="sidebar-brand">
+      <b>Recent Files</b>
+      </a></li>`;
+  for (var i = 0; i < data.length; i++) {
+      var obj = data[i];
+      output += addDataTotemplate(template, shortenText(obj.name), obj.path );
+  }
+  return output;
+}
+
+function createCurrentDirFilesView(data){
+  var template = `<li>
+      <a class="curr-dir-file" data-path="{location}" href="javascript:void(0)">{name}</a>
+  </li>`;
+  var output =`<li class="sidebar-brand">
+      <b>Files</b>
+      </a></li>`;
+  for (var name in data) {
+      var pathVal = data[name];
+      output += addDataTotemplate(template, shortenText(name), pathVal );
+  }
+  return output;
+}
+
+function addDataTotemplate(temp, name, locale){
+  temp = temp.replace("{name}", name);
+  temp = temp.replace("{location}",locale);
+  return temp;
+}
+
+function removeAllRecentFiles(){
+  db.get('files')
+.remove().write();
+}
+
+function shortenText(string){
+  if(string.length > 15) {
+      string = string.substring(0,15)+"...";
+  }
+  return string;
+}
+
 
   async function writeToFile(text, filePath) {
     if (filePath!== undefined && validateFile(filePath)) {

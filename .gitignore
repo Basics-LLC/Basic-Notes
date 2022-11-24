@@ -130,3 +130,6 @@ dist
 .pnp.*
 frontend/static/.DS_Store
 .DS_Store
+
+#DB
+basics_db.json
