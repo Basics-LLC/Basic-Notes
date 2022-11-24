@@ -13,5 +13,5 @@ function cleanUp(elementIds, simplemde) {
     }
     document.getElementById(id).value = '';
   }
-  simplemde.value('');
+  simplemde.setValue('');
 }

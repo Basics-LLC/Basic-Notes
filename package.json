@@ -7,8 +7,8 @@
     "test_pwa:unit": "jest --testPathPattern=__tests__/tests_pwa/unit_tests",
     "test_pwa:integration": "npx playwright test __tests__/tests_pwa/integration_tests --timeout 30000 --config=__tests__/tests_pwa/integration_tests/legacyFile.config.js",
     "test_elec:integration": "npx playwright test __tests__/tests_elec --timeout 30000",
-    "lint_pwa": "eslint pwa_register.js server.js serviceWorker.js frontend/static/js/js_pwa/ __tests__/tests_pwa/",
-    "lint_elec": "eslint main.js frontend/static/js/js_electron/ __tests__/tests_elec/",
+    "lint:pwa": "eslint pwa_register.js server.js serviceWorker.js frontend/static/js/js_pwa/ __tests__/tests_pwa/",
+    "lint:elec": "eslint main.js frontend/static/js/js_electron/ __tests__/tests_elec/",
     "lint-fix": "eslint --fix .  --ext .js --ignore-pattern frontend/static/js/third_party/ --ignore-pattern jsdoc/",
     "start-elec": "electron-forge start",
     "watch": "nodemon --exec electron .",
@@ -16,7 +16,7 @@
     "package": "electron-forge package",
     "make": "electron-forge make",
     "jsdoc:pwa": "./node_modules/.bin/jsdoc -c jsdoc.pwa.json",
-    "presubmit:pwa": "npm run lint_pwa && npm run test_pwa:unit && npm run test_pwa:integration && npm run jsdoc:pwa"
+    "presubmit:pwa": "npm run lint:pwa && npm run test_pwa:unit && npm run test_pwa:integration && npm run jsdoc:pwa"
   },
   "repository": {
     "type": "git",

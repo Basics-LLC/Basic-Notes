@@ -3,34 +3,7 @@
  */
 import {cleanUp}
   from '../../../frontend/static/js/js_pwa/text_handlers/cleanUp.js';
-
-/**
- * This class is used to mock SimpleMDE.
- */
-class SimpleMDEMock {
-  /**
-   * Constructor
-   */
-  constructor() {
-    this.content = '';
-  };
-
-  /**
-   * return the editor content.
-   * @return {string} content.
-   */
-  getValue = () => {
-    return this.content;
-  };
-
-  /**
-   * Set the content of the editor.
-   * @param {string} text to be written to the editor.
-   */
-  value = (text) => {
-    this.content = text;
-  };
-}
+import {SimpleMDEMock} from '../../mocks/mocks.js';
 
 describe('The value of given elements should be cleared', () => {
   test('Input element value should be cleared', () => {
@@ -52,7 +25,7 @@ describe('The value of given elements should be cleared', () => {
             '  <textarea id="testarea">Name</textarea>' +
             '  <input type="text" id="testTitle2" value="Name">' +
             '</div>';
-    simplemde.value('test');
+    simplemde.setValue('test');
     cleanUp(['testTitle2'], simplemde);
     expect(document.getElementById('testTitle2').value).toBe('');
     expect(simplemde.getValue()).toBe('');

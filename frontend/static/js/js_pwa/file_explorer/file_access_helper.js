@@ -1,5 +1,5 @@
 export {getFilesRecursively, generateHandlerInfo};
-import {app} from "../index.js"
+import {app} from '../index.js';
 
 /**
  * Returns the files in the Directory Handle entry point
@@ -43,6 +43,7 @@ async function openFilePicker() {
 
 /**
  * generate the handler info for the app
+ * @param {*} dHandel Waiting for @Harshit to add
  * @return {*} Waiting for @Harshit to add
  */
 async function generateHandlerInfo(dHandel=null) {
