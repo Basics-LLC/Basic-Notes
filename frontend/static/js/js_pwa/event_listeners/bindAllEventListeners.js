@@ -1,13 +1,16 @@
-export {bindAllEventListeners};
+export {bindAllEventListeners, bindSingleFileOpenListenerAsync};
 
 import {cleanUp} from '../text_handlers/cleanUp.js';
 import {openFileDialog, readFile} from '../text_handlers/upload.js';
 import {saveFile} from '../text_handlers/save.js';
+import {listFiles} from '../file_explorer/listFiles.js';
+import {openFile} from '../file_explorer/fileSystemHelper.js';
 import {simplemde} from '../index.js';
 
 const newFileId = 'new-file';
 const uploadFileId = 'upload-file';
 const saveFileId = 'save-file';
+const openDirField = 'open-directory';
 const titleId = 'title';
 const fileSelectorId = 'fileLoader';
 
@@ -51,4 +54,16 @@ function bindAllEventListeners() {
   bindEventListenerAsync(fileSelectorId, changeEvent, readFile,
       fileSelectorId, titleId, simplemde);
   bindEventListenerAsync(saveFileId, clickEvent, saveFile, titleId, simplemde);
+  bindEventListenerAsync(openDirField, clickEvent, listFiles, simplemde);
+}
+
+/**
+ * Bind an event listener to the added li items of files
+ * @param {string} elementId The id of the added li item
+ * @param {Object} simplemde The editor object
+ */
+function bindSingleFileOpenListenerAsync(elementId, simplemde) {
+  document.getElementById(elementId).addEventListener(clickEvent, async () => {
+    openFile(elementId, titleId, simplemde);
+  });
 }

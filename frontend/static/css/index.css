@@ -147,6 +147,9 @@ a {
     white-space: nowrap;
 }
 
+li:hover {
+    cursor: pointer;
+}
 
 /* For mobile phones: */
 @media only screen and (max-width: 650px) {

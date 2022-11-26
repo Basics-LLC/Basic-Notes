@@ -3,9 +3,10 @@ import {app} from '../index.js';
 
 /**
  * Returns the files in the Directory Handle entry point
+ * @param {number} pathDepth Current directory path depth, limit: 1
  * @param {*} entry Waiting for @Harshit to add
  */
-async function* getFilesRecursively(entry) {
+async function* getFilesRecursively(pathDepth, entry) {
   if (entry.kind === 'file') {
     const file = await entry.getFile();
     if (file !== null) {
@@ -13,8 +14,11 @@ async function* getFilesRecursively(entry) {
       yield file;
     }
   } else if (entry.kind === 'directory') {
+    if (pathDepth > 1) {
+      return;
+    }
     for await (const handle of entry.values()) {
-      yield* getFilesRecursively(handle);
+      yield* getFilesRecursively(pathDepth+1, handle);
     }
   }
 }
@@ -26,7 +30,7 @@ async function* getFilesRecursively(entry) {
  */
 async function getAllFilesFromDirectoryHandle(directoryHandle) {
   const allFiles = [];
-  for await (const fileHandleDir of getFilesRecursively(directoryHandle)) {
+  for await (const fileHandleDir of getFilesRecursively(1, directoryHandle)) {
     allFiles.push(fileHandleDir);
   }
   return allFiles;
@@ -37,7 +41,11 @@ async function getAllFilesFromDirectoryHandle(directoryHandle) {
  * @return {*} Waiting for @Harshit to add
  */
 async function openFilePicker() {
-  fileHandle = await window.showDirectoryPicker();
+  const fileHandle = await window.showDirectoryPicker().catch(function(e) {
+    if (e instanceof DOMException && e.name == 'AbortError') {
+      return null;
+    }
+  });
   return fileHandle;
 }
 
@@ -55,6 +63,9 @@ async function generateHandlerInfo(dHandel=null) {
     handleInfo.handle = await openFilePicker();
   } else {
     handleInfo.handle = dHandel;
+  }
+  if (handleInfo.handle == null) {
+    return null;
   }
   handleInfo.file_handles =
     await getAllFilesFromDirectoryHandle(handleInfo.handle);

@@ -7,14 +7,14 @@ const fs = require('fs');
 const renderMarkdown = require('../text_handlers/markdown');
 const marked = require('marked');
 const DOMPurify = require('dompurify');
-const SimpleMDEClass = require("../../third_party/simplemde");
-const low = require('lowdb')
-const FileSync = require('lowdb/adapters/FileSync')
-const adapter = new FileSync('basics_db.json')
-const db = low(adapter)
+const SimpleMDEClass = require('../../third_party/simplemde');
+const low = require('lowdb');
+const FileSync = require('lowdb/adapters/FileSync');
+const adapter = new FileSync('basics_db.json');
+const db = low(adapter);
 
-db.defaults({ files: [], count: 0 })
-  .write()
+db.defaults({files: [], count: 0})
+    .write();
 
 
 // frontend\static\js\js_electron\text_handlers\markdown.js
@@ -26,11 +26,11 @@ function bindAllEventListenersInElec() {
   const newFileBtn = document.getElementById('new-file');
   const uploadFileBtn = document.getElementById('upload-file');
   const saveFileBtn = document.getElementById('save-file');
-  var simplemde = new SimpleMDEClass({ element: document.getElementById("textarea") });
+  const simplemde = new SimpleMDEClass({element: document.getElementById('textarea')});
   const noteTitle = document.getElementById('title');
-  let recentFiles = document.getElementById('recent-files');
-  let currDirFiles = document.getElementById('current-dir-files');
-  
+  const recentFiles = document.getElementById('recent-files');
+  const currDirFiles = document.getElementById('current-dir-files');
+
 
   let activeFile ='';
   getRecentFiles();
@@ -38,11 +38,11 @@ function bindAllEventListenersInElec() {
   // Button Actions
   saveFileBtn.addEventListener('click', async () =>{
     let fname = '';
-    var content=simplemde.value();
+    const content=simplemde.value();
     if (isFileActive()) {
       fname = getActiveFile();
     } else {
-      var fileName = noteTitle.value
+      const fileName = noteTitle.value;
       console.log(fileName);
       const file = await openSaveDialog(fileName);
       if (file.canceled) {
@@ -83,16 +83,13 @@ function bindAllEventListenersInElec() {
     return false;
   });
 
-  document.getElementById("wrapper").addEventListener("click",function(e){
-    if(e.target.classList.contains('recent-file'))
-    {
+  document.getElementById('wrapper').addEventListener('click', function(e) {
+    if (e.target.classList.contains('recent-file')) {
       var el = e.target;
       var path = el.getAttribute('data-path');
       openFile(path);
       return false;
-    }
-    else if (e.target.classList.contains('curr-dir-file'))
-    {
+    } else if (e.target.classList.contains('curr-dir-file')) {
       var el = e.target;
       var path = el.getAttribute('data-path');
       console.log(path);
@@ -121,7 +118,7 @@ function bindAllEventListenersInElec() {
   function cancelFileEdit() {
     setActiveFile(undefined);
     noteTitle.value = '';
-    simplemde.value("");
+    simplemde.value('');
   }
 
   // //Utililty Functions
@@ -147,7 +144,7 @@ function bindAllEventListenersInElec() {
   }
 
   function createFile(fname) {
-    var content=simplemde.value();
+    const content=simplemde.value();
     writeToFile(content, fname).then(function() {
       saveFile(fname);
     });
@@ -168,7 +165,7 @@ function bindAllEventListenersInElec() {
 
   function openSaveDialog(df) {
     const file = dialog.showSaveDialog(
-        { title: "Save Note", defaultPath: df, properties: ['selectFile'], filters: [{ name: 'Markdown file', extensions: ['md'] }]});
+        {title: 'Save Note', defaultPath: df, properties: ['selectFile'], filters: [{name: 'Markdown file', extensions: ['md']}]});
     setActiveFile(file.filePath);
     return file;
   }
@@ -176,7 +173,7 @@ function bindAllEventListenersInElec() {
 
   async function openSelectFileDialog() {
     const result = await dialog.showOpenDialog(
-        {title: "Open Note", properties: ['openFile']});
+        {title: 'Open Note', properties: ['openFile']});
     const filename = result.filePaths[0];
     return filename;
   }
@@ -188,11 +185,11 @@ function bindAllEventListenersInElec() {
   }
 
   function addRecentFile(fileName, filePath) {
-    if(!recentFileExists(fileName)){
+    if (!recentFileExists(fileName)) {
       db.get('files')
-      .push({ name: fileName, path: filePath})
-      .write()
-  }
+          .push({name: fileName, path: filePath})
+          .write();
+    }
   }
 
   function setActiveFile(filename) {
@@ -203,91 +200,88 @@ function bindAllEventListenersInElec() {
     }
   }
 
-  function recentFileExists(recentFileName){
-    var count = db.get('files')
-        .find({ name: recentFileName })
+  function recentFileExists(recentFileName) {
+    const count = db.get('files')
+        .find({name: recentFileName})
         .size()
         .value();
-    if(count > 0 ){
-        return true;
+    if (count > 0 ) {
+      return true;
     }
     return false;
-}
-
-function getRecentFiles(){
-  var files = db.get('files').value("files");
-  var htmlView = createRecentFilesView(files);
-  recentFiles.innerHTML = '';
-  recentFiles.innerHTML = htmlView;
-}
-
-function getCurrentDirFiles(){
-  if(isFileActive())
-  {
-    const filename = getActiveFile();
-    var dirPath = path.dirname(filename)
-    var filePaths = {};
-    fs.readdir(dirPath,(err, files) => {
-      for (var i = 0; i < files.length; i++) {
-        var fp = files[i];
-        if(fp.split('.').pop() == "md" || fp.split('.').pop() == "txt")
-        {
-          filePaths[fp] = dirPath + "\\" + fp;
-        }
-        
-    }
-    var htmlView = createCurrentDirFilesView(filePaths);
-    currDirFiles.innerHTML = '';
-    currDirFiles.innerHTML = htmlView;
-    })
   }
-}
 
-function createRecentFilesView(data){
-  var template = `<li>
+  function getRecentFiles() {
+    const files = db.get('files').value('files');
+    const htmlView = createRecentFilesView(files);
+    recentFiles.innerHTML = '';
+    recentFiles.innerHTML = htmlView;
+  }
+
+  function getCurrentDirFiles() {
+    if (isFileActive()) {
+      const filename = getActiveFile();
+      const dirPath = path.dirname(filename);
+      const filePaths = {};
+      fs.readdir(dirPath, (err, files) => {
+        for (let i = 0; i < files.length; i++) {
+          const fp = files[i];
+          if (fp.split('.').pop() == 'md' || fp.split('.').pop() == 'txt') {
+            filePaths[fp] = dirPath + '\\' + fp;
+          }
+        }
+        const htmlView = createCurrentDirFilesView(filePaths);
+        currDirFiles.innerHTML = '';
+        currDirFiles.innerHTML = htmlView;
+      });
+    }
+  }
+
+  function createRecentFilesView(data) {
+    const template = `<li>
       <a class="recent-file" data-path="{location}" href="javascript:void(0)">{name}</a>
   </li>`;
-  var output =`<li class="sidebar-brand">
+    let output =`<li class="sidebar-brand">
       <b>Recent Files</b>
       </a></li>`;
-  for (var i = 0; i < data.length; i++) {
-      var obj = data[i];
+    for (let i = 0; i < data.length; i++) {
+      const obj = data[i];
       output += addDataTotemplate(template, shortenText(obj.name), obj.path );
+    }
+    return output;
   }
-  return output;
-}
 
-function createCurrentDirFilesView(data){
-  var template = `<li>
+  function createCurrentDirFilesView(data) {
+    const template = `<li>
       <a class="curr-dir-file" data-path="{location}" href="javascript:void(0)">{name}</a>
   </li>`;
-  var output =`<li class="sidebar-brand">
+    let output =`<li class="sidebar-brand">
       <b>Files</b>
       </a></li>`;
-  for (var name in data) {
-      var pathVal = data[name];
+    for (const name in data) {
+      const pathVal = data[name];
       output += addDataTotemplate(template, shortenText(name), pathVal );
+    }
+    return output;
   }
-  return output;
-}
 
-function addDataTotemplate(temp, name, locale){
-  temp = temp.replace("{name}", name);
-  temp = temp.replace("{location}",locale);
-  return temp;
-}
-
-function removeAllRecentFiles(){
-  db.get('files')
-.remove().write();
-}
-
-function shortenText(string){
-  if(string.length > 15) {
-      string = string.substring(0,15)+"...";
+  function addDataTotemplate(temp, name, locale) {
+    temp = temp.replace('{name}', name);
+    temp = temp.replace('{location}', locale);
+    return temp;
   }
-  return string;
-}
+
+  function removeAllRecentFiles() {
+    db.get('files')
+        .remove().write();
+  }
+
+  function shortenText(string) {
+    if (string.length > 15) {
+      string = string.substring(0, 15)+'...';
+    }
+    return string;
+  }
 
 
   async function writeToFile(text, filePath) {
