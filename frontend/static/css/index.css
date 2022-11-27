@@ -13,11 +13,9 @@ body {
     margin-right: auto;
 }
 
-/* The 'dcode' green always needs to make an appearance */
 a {
     color: #009579;
 }
-
 
 #app {
     margin: 2em;
@@ -25,87 +23,11 @@ a {
     font-weight: 500;
 }
 
-#main {
-    margin-top: 2%;
-    height: 100%;
-    max-height: 100%;
-}
-
-#title {
-    margin-bottom: 20px;
-    height: 35px;
-    width: 40%;
-    background-color: transparent;
-    border-radius: 4px;
-    border: 0;
-    box-shadow: inset 0 0 0 1px rgba(144, 144, 144, 0.5);
-    color: #555;
-    display: inline-block;
-    font-size: 0.9em;
-    font-weight: 100;
-    height: 2.75em;
-    letter-spacing: 0.125em;
-    line-height: 2.75em;
-    padding: 0 2em;
-    text-align: center;
-    text-decoration: none;
-    text-indent: 0.125em;
-    white-space: nowrap;
-}
-
-#textarea {
-    resize: none;
-    height: 90%;
-    width: 100%;
-    padding: 0;
-    margin: 0;
-    max-width: 100%;
-    margin-bottom: 15px;
-    box-sizing: border-box;
-    display: block;
-}
-
-#fileLoader {
-    display: none;
-}
-
-
-/* Creates a full-height, left-mounted navigation menu */
-.nav {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: var(--nav-width);
-    height: 100vh;
-    background: #222222;
-}
-
-/* Making these look fantastic */
-.nav__link {
-    display: block;
-    padding: 12px 18px;
-    text-decoration: none;
-    color: #eeeeee;
-    font-weight: 500;
-}
-
-.nav__link:hover {
-    background: rgba(255, 255, 255, 0.05);
-}
-
-.CodeMirror {
-    height: 80%;
-}
-
-.button-group {
-    display: flex;
-}
-
 .button {
     flex: 1;
     position: relative;
-    width: 25%;
-    margin: 0 5px 0 5px;
+    width: 100%;
+    margin: 0 0 0 0;
     background-color: transparent;
     border-radius: 4px;
     border: 0;
@@ -126,8 +48,107 @@ a {
     white-space: nowrap;
 }
 
-.button:hover {
-    background-color: rgba(144, 144, 144, 0.085);
+.title-container {
+    width: 100%;
+}
+
+#title {
+    margin-top: 2%;
+    margin-bottom: 20px;
+    height: 35px;
+    width: 40%;
+    background-color: transparent;
+    border-radius: 4px;
+    border: 0;
+    box-shadow: inset 0 0 0 1px rgba(144, 144, 144, 0.5);
+    color: #555;
+    display: inline-block;
+    font-size: 0.85em;
+    font-weight: 100;
+    height: 2.75em;
+    letter-spacing: 0.125em;
+    line-height: 2.75em;
+    padding: 0 2em;
+    text-align: center;
+    text-decoration: none;
+    text-indent: 0.125em;
+    white-space: nowrap;
+}
+
+.main-container {
+    max-width: 100%;
+    display: flex;
+    max-height: 90%;
+    margin-bottom: 25px;
+}
+
+.directory-container {
+    flex: 15%;
+    font-size: 0.7em;
+}
+#open-directory {
+    border-radius: 0;
+}
+#fileLoader {
+    display: none;
+}
+
+.editor-container {
+    flex: 80%;
+}
+#textarea {
+    resize: none;
+    height: 100%;
+    padding: 0;
+    margin: 0;
+    max-width: 100%;
+    margin-bottom: 15px;
+    box-sizing: border-box;
+    display: block;
+}
+
+
+/* Creates a full-height, left-mounted navigation menu */
+.nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: var(--nav-width);
+    height: 100vh;
+    background: #222222;
+}
+
+.nav__link {
+    display: block;
+    padding: 12px 18px;
+    text-decoration: none;
+    color: #eeeeee;
+    font-weight: 500;
+}
+.nav__link:hover {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+
+.CodeMirror {
+    height: 80%;
+}
+
+.button-group {
+    display: flex;
+}
+
+#new-file {
+    width: 25%;
+    margin: 0 5px 0 5px;
+}
+#upload-file {
+    width: 25%;
+    margin: 0 5px 0 5px;
+}
+#save-file {
+    width: 25%;
+    margin: 0 5px 0 5px;
 }
 
 .footer {
@@ -147,17 +168,79 @@ a {
     white-space: nowrap;
 }
 
+
+button:hover {
+    background-color: rgba(144, 144, 144, 0.085);
+}
+
 li:hover {
     cursor: pointer;
 }
 
-/* For mobile phones: */
-@media only screen and (max-width: 650px) {
-    .button {
-    width: 100%;
-    margin: 10px 0 0 0;
+
+/* Responsiveness */
+@media only screen and (max-width: 770px) {
+    #new-file {
+        width: 100%;
+        margin: 10px 0 0 0;
+    }
+    #upload-file {
+        width: 100%;
+        margin: 10px 0 0 0;
+    }
+    #save-file {
+        width: 100%;
+        margin: 10px 0 0 0;
     }
     .button-group {
         display: block;
+    }
+    .main-container {
+        display: block;
+        margin-bottom: 0;
+    }
+}
+
+@media only screen and (max-width: 283px) {
+    #new-file {
+        width: 100%;
+        margin: 10px 0 0 0;
+    }
+    #upload-file {
+        width: 100%;
+        margin: 10px 0 0 0;
+    }
+    #save-file {
+        width: 100%;
+        margin: 10px 0 0 0;
+    }
+    .button-group {
+        display: block;
+    }
+    .main-container {
+        display: block;
+        margin-bottom: 20px;
+    }
+}
+
+@media only screen and (max-width: 204px) {
+    #new-file {
+        width: 100%;
+        margin: 10px 0 0 0;
+    }
+    #upload-file {
+        width: 100%;
+        margin: 10px 0 0 0;
+    }
+    #save-file {
+        width: 100%;
+        margin: 10px 0 0 0;
+    }
+    .button-group {
+        display: block;
+    }
+    .main-container {
+        display: block;
+        margin-bottom: 20px;
     }
 }

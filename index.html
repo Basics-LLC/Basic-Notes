@@ -11,15 +11,20 @@
 </head>
 
 <body>
-    <div id="main">
+    <div class="title-container">
         <input type="text" id="title" placeholder="Name of Note" />
-        <br>
-        <textarea id="textarea" placeholder="Enter text here"></textarea>
     </div>
 
-    <ol id = "directory-files"></ol>
-    <button type="button" id="open-directory">Open Directory</button>
-    <input type="file" id="fileLoader" name="files" title="Load File" accept=".txt, .md" />
+    <div class="main-container">
+        <div class="directory-container">
+            <button type="button" class="button" id="open-directory">Open Directory</button>
+            <ol id = "directory-files"></ol>
+            <input type="file" id="fileLoader" name="files" title="Load File" accept=".txt, .md"/>
+        </div>
+        <div class="editor-container">
+            <textarea id="textarea" placeholder="Enter text here"></textarea>
+        </div>
+    </div>
 
     <div class="button-group">
         <button type="button" class="button" id="new-file">New File</button>
