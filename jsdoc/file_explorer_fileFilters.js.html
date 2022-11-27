@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: text_handlers/cleanUp.js</title>
+    <title>JSDoc: Source: file_explorer/fileFilters.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: text_handlers/cleanUp.js</h1>
+    <h1 class="page-title">Source: file_explorer/fileFilters.js</h1>
 
     
 
@@ -26,22 +26,17 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>export {cleanUp};
+            <pre class="prettyprint source linenums"><code>export {filterCertainFormats};
 
 /**
- * Clean up all the values of elements given by id.
- * @param {list} elementIds Ids of elements to be cleared.
- * @param {Object} simplemde The markdown editor object
+ * Filter files in the seletced directory to be displayed
+ * @param {string} fileName The complete name of the file, extension included
+ * @param  {array} allowedFormats The file formats allowed to be displaed
+ * @return {boolean} whether the file falls into the allowed format
  */
-function cleanUp(elementIds, simplemde) {
-  for (let i=0; i&lt;elementIds.length; i++) {
-    const id = elementIds[i];
-    if (id === '') {
-      continue;
-    }
-    document.getElementById(id).value = '';
-  }
-  simplemde.setValue('');
+function filterCertainFormats(fileName, allowedFormats) {
+  const format = fileName.split('.').pop();
+  return allowedFormats.includes(format);
 }
 </code></pre>
         </article>

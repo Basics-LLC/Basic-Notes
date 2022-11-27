@@ -1,5 +1,5 @@
 export {saveFileFS, openFileFS, createNewFileFS};
-import {listFiles} from './listFiles.js';
+import {addNewFile} from './listFiles.js';
 import {app} from '../index.js';
 import {onFileReadListener} from '../text_handlers/upload.js';
 
@@ -7,13 +7,32 @@ import {onFileReadListener} from '../text_handlers/upload.js';
  * Function to write the file
  * @param {string} fileName The name of the file to be written
  * @param {string} contents The contents of the file to be written.
+ * @param {string} titleId The id of the title element
+ * @param {Object} simplemde The editor
  * eslint-disable-line no-unused-vars
  */
-async function writeToFile(fileName, contents) {
+async function writeToFile(fileName, contents, titleId, simplemde) {
   const fileHandle = await app.dir_handle.getFileHandle(fileName);
   const writable = await fileHandle.createWritable();
   await writable.write(contents);
   await writable.close();
+  const file = await fileHandle.getFile();
+  onFileReadListener(titleId, file.name, await readFromFile(file), simplemde);
+  updateHandler(file, fileName);
+}
+
+/**
+ * Update stored file object after editing
+ * @param {File} file The updated File object
+ * @param {string} fileName The name of the file
+ */
+function updateHandler(file, fileName) {
+  for (let i=0; i<app.file_handles.length; i++) {
+    if (app.file_handles[i].name === fileName) {
+      app.file_handles[i] = file;
+      break;
+    }
+  }
 }
 
 /**
@@ -24,7 +43,7 @@ async function writeToFile(fileName, contents) {
 async function saveFileFS(titleId, simplemde) {
   const fileName = document.getElementById(titleId).value;
   const contents = simplemde.getValue();
-  writeToFile(fileName, contents);
+  writeToFile(fileName, contents, titleId, simplemde);
 }
 
 /**
@@ -34,7 +53,7 @@ async function saveFileFS(titleId, simplemde) {
  */
 async function readFromFile(flHandle) {
   const reader = await flHandle.stream().getReader();
-  const data = await reader.read().then(console.log('READ DATA'));
+  const data = await reader.read();
   return new TextDecoder().decode(data.value);
   // run repopulate list function
 }
@@ -74,8 +93,9 @@ async function createNewFileFS(titleId, simplemde) {
       return null;
     }
   });
-  listFiles(app.dir_handle);
   const file = await newHandle.getFile();
+  app.new_files.push(file);
   onFileReadListener(titleId, file.name, await readFromFile(file), simplemde);
+  addNewFile();
   return newHandle;
 }

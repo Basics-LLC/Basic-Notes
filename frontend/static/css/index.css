@@ -100,8 +100,9 @@ h2 {
 .main-container {
     max-width: 100%;
     display: flex;
-    max-height: 90%;
+    max-height: calc(60vh);
     margin-bottom: 25px;
+    min-height: calc(60vh);
 }
 .directory-container {
     flex: 15%;
@@ -210,6 +211,8 @@ li:hover {
     .main-container {
         display: block;
         margin-bottom: 0;
+        max-height: none;
+        min-height: auto;
     }
 }
 
@@ -224,5 +227,7 @@ li:hover {
     .main-container {
         display: block;
         margin-bottom: 20px;
+        max-height: none;
+        min-height: auto;
     }
 }

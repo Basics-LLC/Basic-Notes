@@ -1,4 +1,4 @@
-export {listFiles};
+export {listFiles, addNewFile};
 import {generateHandlerInfo} from './fileAccessHelper.js';
 import {bindAllEventListenersForFS} from
   '../event_listeners/bindAllEventListeners.js';
@@ -24,15 +24,45 @@ async function listFiles(dHandel=null) {
     if (!filterCertainFormats(fileHandleDir.name, allowedFormats)) {
       return;
     }
-    const child = document.createElement('li');
-    child.id = fileHandleDir.name;
-    child.innerHTML = fileHandleDir.name;
-    listElement.append(child);
-    itemIds.push(child.id);
+    itemIds.push(createListItem(fileHandleDir, listElement));
   });
 
   if (!app.dir_opened) {
     app.dir_opened = true;
-    bindAllEventListenersForFS(itemIds);
+    bindAllEventListenersForFS(itemIds, true);
   }
+}
+
+/**
+ * Add a new file item to the directory and bind listener
+ */
+function addNewFile() {
+  if (app.new_files.length === 0) {
+    return;
+  }
+  const listElement = document.getElementById('directory-files');
+  const itemIds = [];
+  app.new_files.forEach((file) => {
+    if (!filterCertainFormats(file.name, allowedFormats)) {
+      return;
+    }
+    itemIds.push(createListItem(file, listElement));
+    app.file_handles.push(file);
+  });
+  bindAllEventListenersForFS(itemIds, false);
+  app.new_files = [];
+}
+
+/**
+ * Create a new item element and append to the list element
+ * @param {File} file The file object
+ * @param {HTMLElement} listElement The list element in HTML
+ * @return {string} The id of the created item element
+ */
+function createListItem(file, listElement) {
+  const child = document.createElement('li');
+  child.id = file.name;
+  child.innerHTML = file.name;
+  listElement.append(child);
+  return child.id;
 }

@@ -64,7 +64,11 @@ function bindAllEventListeners() {
  * @param {Object} simplemde The editor object
  */
 function bindSingleFileOpenListenerAsync(elementId, simplemde) {
-  document.getElementById(elementId).addEventListener(clickEvent, async () => {
+  document.getElementById(elementId).addEventListener(clickEvent, async (e) => {
+    for (const element of document.getElementsByTagName('li')) {
+      element.style.outline = 'none';
+    }
+    e.target.style.outline = 'solid blue 2px';
     openFileFS(elementId, titleId, simplemde);
   });
 }
@@ -82,16 +86,21 @@ function cleanButtonListener(buttonId) {
 /**
  * Bind all event listeners. For File System mode.
  * @param {array} itemIds The array of item ids.
+ * @param {boolean} init Whether this is the first time to open a directory
  */
-function bindAllEventListenersForFS(itemIds) {
+function bindAllEventListenersForFS(itemIds, init=false) {
   itemIds.forEach((id) => {
     bindSingleFileOpenListenerAsync(id, simplemde);
   });
+  if (!init) {
+    return;
+  }
   cleanButtonListener(newFileId);
   cleanButtonListener(saveFileId);
   bindEventListenerAsync(newFileId, clickEvent,
       createNewFileFS, titleId, simplemde);
   document.getElementById(uploadFileId).disabled = true;
+  document.getElementById(titleId).disabled = true;
   bindEventListenerAsync(saveFileId, clickEvent,
       saveFileFS, titleId, simplemde);
 }

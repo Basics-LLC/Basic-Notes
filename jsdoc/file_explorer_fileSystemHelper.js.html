@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: file_explorer/fileSystemHelper.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: file_explorer/fileSystemHelper.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>export {saveFileFS, openFileFS, createNewFileFS};
+import {addNewFile} from './listFiles.js';
+import {app} from '../index.js';
+import {onFileReadListener} from '../text_handlers/upload.js';
+
+/**
+ * Function to write the file
+ * @param {string} fileName The name of the file to be written
+ * @param {string} contents The contents of the file to be written.
+ * @param {string} titleId The id of the title element
+ * @param {Object} simplemde The editor
+ * eslint-disable-line no-unused-vars
+ */
+async function writeToFile(fileName, contents, titleId, simplemde) {
+  const fileHandle = await app.dir_handle.getFileHandle(fileName);
+  const writable = await fileHandle.createWritable();
+  await writable.write(contents);
+  await writable.close();
+  const file = await fileHandle.getFile();
+  onFileReadListener(titleId, file.name, await readFromFile(file), simplemde);
+  updateHandler(file, fileName);
+}
+
+/**
+ * Update stored file object after editing
+ * @param {File} file The updated File object
+ * @param {string} fileName The name of the file
+ */
+function updateHandler(file, fileName) {
+  for (let i=0; i&lt;app.file_handles.length; i++) {
+    if (app.file_handles[i].name === fileName) {
+      app.file_handles[i] = file;
+      break;
+    }
+  }
+}
+
+/**
+ * Save the modification through file system directly to the local file.
+ * @param {string} titleId The id of the title element
+ * @param {Object} simplemde The editor
+ */
+async function saveFileFS(titleId, simplemde) {
+  const fileName = document.getElementById(titleId).value;
+  const contents = simplemde.getValue();
+  writeToFile(fileName, contents, titleId, simplemde);
+}
+
+/**
+ * Function to read the file
+ * @param {*} flHandle Waiting for @Harshit to add
+ * @return {*} Waiting for @Harshit to add
+ */
+async function readFromFile(flHandle) {
+  const reader = await flHandle.stream().getReader();
+  const data = await reader.read();
+  return new TextDecoder().decode(data.value);
+  // run repopulate list function
+}
+
+/**
+ * Open the clicked file
+ * @param {string} elementId The id of selected file element
+ * @param {string} titleId The id of the title element
+ * @param {Object} simplemde The editor object
+ */
+async function openFileFS(elementId, titleId, simplemde) {
+  for (const flHandle of app.file_handles) {
+    if (flHandle.name === elementId) {
+      onFileReadListener(titleId, flHandle.name,
+          await readFromFile(flHandle), simplemde);
+      break;
+    }
+  }
+}
+
+/**
+ * Function to create new file
+ * @param {string} titleId The id of the title element
+ * @param {Object} simplemde The editor
+ * @return {newHandle} file handle of the new file created
+ */
+async function createNewFileFS(titleId, simplemde) {
+  const opts = {
+    excludeAcceptAllOption: true,
+    types: [{
+      description: 'Text file',
+      accept: {'text/plain': ['.txt', '.md']},
+    }],
+  };
+  const newHandle = await window.showSaveFilePicker(opts).catch(function(e) {
+    if (e instanceof DOMException &amp;&amp; e.name == 'AbortError') {
+      return null;
+    }
+  });
+  const file = await newHandle.getFile();
+  app.new_files.push(file);
+  onFileReadListener(titleId, file.name, await readFromFile(file), simplemde);
+  addNewFile();
+  return newHandle;
+}
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#addNewFile">addNewFile</a></li><li><a href="global.html#bindAllEventListeners">bindAllEventListeners</a></li><li><a href="global.html#bindAllEventListenersForFS">bindAllEventListenersForFS</a></li><li><a href="global.html#bindEventListener">bindEventListener</a></li><li><a href="global.html#bindEventListenerAsync">bindEventListenerAsync</a></li><li><a href="global.html#bindSingleFileOpenListenerAsync">bindSingleFileOpenListenerAsync</a></li><li><a href="global.html#cleanButtonListener">cleanButtonListener</a></li><li><a href="global.html#cleanUp">cleanUp</a></li><li><a href="global.html#constructFile">constructFile</a></li><li><a href="global.html#createListItem">createListItem</a></li><li><a href="global.html#createNewFileFS">createNewFileFS</a></li><li><a href="global.html#filterCertainFormats">filterCertainFormats</a></li><li><a href="global.html#generateHandlerInfo">generateHandlerInfo</a></li><li><a href="global.html#getAllFilesFromDirectoryHandle">getAllFilesFromDirectoryHandle</a></li><li><a href="global.html#getFilesRecursively">getFilesRecursively</a></li><li><a href="global.html#listFiles">listFiles</a></li><li><a href="global.html#onFileReadListener">onFileReadListener</a></li><li><a href="global.html#openFileDialog">openFileDialog</a></li><li><a href="global.html#openFileFS">openFileFS</a></li><li><a href="global.html#openFilePicker">openFilePicker</a></li><li><a href="global.html#readFile">readFile</a></li><li><a href="global.html#readFileContent">readFileContent</a></li><li><a href="global.html#readFileName">readFileName</a></li><li><a href="global.html#readFromFile">readFromFile</a></li><li><a href="global.html#saveFile">saveFile</a></li><li><a href="global.html#saveFileFS">saveFileFS</a></li><li><a href="global.html#updateHandler">updateHandler</a></li><li><a href="global.html#writeToFile">writeToFile</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.0</a> on Sun Nov 27 2022 10:53:32 GMT-0800 (Pacific Standard Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

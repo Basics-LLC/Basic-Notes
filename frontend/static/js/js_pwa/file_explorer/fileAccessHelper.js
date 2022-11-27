@@ -10,7 +10,6 @@ async function* getFilesRecursively(pathDepth, entry) {
   if (entry.kind === 'file') {
     const file = await entry.getFile();
     if (file !== null) {
-      // file.relativePath = getRelativePath(entry);
       yield file;
     }
   } else if (entry.kind === 'directory') {
