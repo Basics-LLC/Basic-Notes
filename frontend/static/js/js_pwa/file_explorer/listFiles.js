@@ -1,16 +1,17 @@
 export {listFiles};
 import {generateHandlerInfo} from './fileAccessHelper.js';
-import {bindSingleFileOpenListenerAsync} from
+import {bindAllEventListenersForFS} from
   '../event_listeners/bindAllEventListeners.js';
+import {app} from '../index.js';
+import {filterCertainFormats} from './fileFilters.js';
 
 const allowedFormats = ['md', 'txt'];
 
 /**
  * Waiting for @Harshit to add
- * @param {Object} simplemde The editor object
  * @param {*} dHandel Waiting for @Harshit to add
  */
-async function listFiles(simplemde, dHandel=null) {
+async function listFiles(dHandel=null) {
   const listElement = document.getElementById('directory-files');
   listElement.innerHTML = '';
   const dirInfo = await generateHandlerInfo(dHandel);
@@ -18,6 +19,7 @@ async function listFiles(simplemde, dHandel=null) {
     return;
   }
 
+  const itemIds = [];
   dirInfo.file_handles.forEach((fileHandleDir) => {
     if (!filterCertainFormats(fileHandleDir.name, allowedFormats)) {
       return;
@@ -26,18 +28,11 @@ async function listFiles(simplemde, dHandel=null) {
     child.id = fileHandleDir.name;
     child.innerHTML = fileHandleDir.name;
     listElement.append(child);
-    bindSingleFileOpenListenerAsync(child.id, simplemde);
+    itemIds.push(child.id);
   });
-}
 
-
-/**
- * Filter files in the seletced directory to be displayed
- * @param {string} fileName The complete name of the file, extension included
- * @param  {array} allowedFormats The file formats allowed to be displaed
- * @return {boolean} whether the file falls into the allowed format
- */
-function filterCertainFormats(fileName, allowedFormats) {
-  const format = fileName.split('.').pop();
-  return allowedFormats.includes(format);
+  if (!app.dir_opened) {
+    app.dir_opened = true;
+    bindAllEventListenersForFS(itemIds);
+  }
 }

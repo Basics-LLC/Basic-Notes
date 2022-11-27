@@ -151,6 +151,14 @@ a {
     margin: 0 5px 0 5px;
 }
 
+button:disabled,
+button[disabled]{
+  border: 1px solid #999999;
+  background-color: #cccccc;
+  color: #666666;
+  cursor: not-allowed;
+}
+
 .footer {
     background-color:#e5e5e5;
     padding:10px;
