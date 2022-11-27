@@ -4,21 +4,24 @@ import {bindAllEventListenersForFS} from
   '../event_listeners/bindAllEventListeners.js';
 import {app} from '../index.js';
 import {filterCertainFormats} from './fileFilters.js';
+import {cleanUp} from '../text_handlers/cleanUp.js';
 
 const allowedFormats = ['md', 'txt'];
 
 /**
  * Waiting for @Harshit to add
+ * @param {string} titleId The id of the title element
+ * @param {Object} simplemde The editor object
  * @param {*} dHandel Waiting for @Harshit to add
  */
-async function listFiles(dHandel=null) {
+async function listFiles(titleId, simplemde, dHandel=null) {
   const listElement = document.getElementById('directory-files');
-  listElement.innerHTML = '';
   const dirInfo = await generateHandlerInfo(dHandel);
   if (dirInfo == null) {
     return;
   }
 
+  listElement.innerHTML = '';
   const itemIds = [];
   dirInfo.file_handles.forEach((fileHandleDir) => {
     if (!filterCertainFormats(fileHandleDir.name, allowedFormats)) {
@@ -26,6 +29,8 @@ async function listFiles(dHandel=null) {
     }
     itemIds.push(createListItem(fileHandleDir, listElement));
   });
+
+  cleanUp([titleId], simplemde);
 
   if (!app.dir_opened) {
     app.dir_opened = true;

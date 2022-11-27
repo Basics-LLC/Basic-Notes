@@ -55,7 +55,8 @@ function bindAllEventListeners() {
   bindEventListenerAsync(fileSelectorId, changeEvent, readFile,
       fileSelectorId, titleId, simplemde);
   bindEventListenerAsync(saveFileId, clickEvent, saveFile, titleId, simplemde);
-  bindEventListenerAsync(openDirField, clickEvent, listFiles);
+  bindEventListenerAsync(openDirField, clickEvent, listFiles,
+      titleId, simplemde);
 }
 
 /**
