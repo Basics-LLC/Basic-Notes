@@ -62,7 +62,14 @@ async function openFileFS(elementId, titleId, simplemde) {
  * @return {newHandle} file handle of the new file created
  */
 async function createNewFileFS(titleId, simplemde) {
-  const newHandle = await window.showSaveFilePicker().catch(function(e) {
+  const opts = {
+    excludeAcceptAllOption: true,
+    types: [{
+      description: 'Text file',
+      accept: {'text/plain': ['.txt', '.md']},
+    }],
+  };
+  const newHandle = await window.showSaveFilePicker(opts).catch(function(e) {
     if (e instanceof DOMException && e.name == 'AbortError') {
       return null;
     }
