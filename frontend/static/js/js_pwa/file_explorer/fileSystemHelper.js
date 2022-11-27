@@ -1,19 +1,30 @@
-export {openFile};
+export {saveFileFS, openFileFS, createNewFileFS};
 import {listFiles} from './listFiles.js';
 import {app} from '../index.js';
+import {onFileReadListener} from '../text_handlers/upload.js';
 
 /**
  * Function to write the file
- * @param {*} dHandel Waiting for @Harshit to add
- * @param {*} flHandle Waiting for @Harshit to add
- * @param {*} contents Waiting for @Harshit to add
+ * @param {string} fileName The name of the file to be written
+ * @param {string} contents The contents of the file to be written.
  * eslint-disable-line no-unused-vars
  */
-async function writeToFile(dHandel, flHandle, contents) {
-  const fileHandle = await dHandel.getFileHandle(flHandle.name);
+async function writeToFile(fileName, contents) {
+  const fileHandle = await app.dir_handle.getFileHandle(fileName);
   const writable = await fileHandle.createWritable();
   await writable.write(contents);
   await writable.close();
+}
+
+/**
+ * Save the modification through file system directly to the local file.
+ * @param {string} titleId The id of the title element
+ * @param {Object} simplemde The editor
+ */
+async function saveFileFS(titleId, simplemde) {
+  const fileName = document.getElementById(titleId).value;
+  const contents = simplemde.getValue();
+  writeToFile(fileName, contents);
 }
 
 /**
@@ -34,11 +45,11 @@ async function readFromFile(flHandle) {
  * @param {string} titleId The id of the title element
  * @param {Object} simplemde The editor object
  */
-async function openFile(elementId, titleId, simplemde) {
+async function openFileFS(elementId, titleId, simplemde) {
   for (const flHandle of app.file_handles) {
     if (flHandle.name === elementId) {
-      document.getElementById(titleId).value = flHandle.name;
-      simplemde.setValue(await readFromFile(flHandle));
+      onFileReadListener(titleId, flHandle.name,
+          await readFromFile(flHandle), simplemde);
       break;
     }
   }
@@ -46,10 +57,18 @@ async function openFile(elementId, titleId, simplemde) {
 
 /**
  * Function to create new file
+ * @param {string} titleId The id of the title element
+ * @param {Object} simplemde The editor
  * @return {newHandle} file handle of the new file created
  */
-async function createNewFile() {
-  const newHandle = await window.showSaveFilePicker();
+async function createNewFileFS(titleId, simplemde) {
+  const newHandle = await window.showSaveFilePicker().catch(function(e) {
+    if (e instanceof DOMException && e.name == 'AbortError') {
+      return null;
+    }
+  });
   listFiles(app.dir_handle);
+  const file = await newHandle.getFile();
+  onFileReadListener(titleId, file.name, await readFromFile(file), simplemde);
   return newHandle;
 }

@@ -130,6 +130,14 @@ a {
     background-color: rgba(144, 144, 144, 0.085);
 }
 
+button:disabled,
+button[disabled]{
+  border: 1px solid #999999;
+  background-color: #cccccc;
+  color: #666666;
+  cursor: not-allowed;
+}
+
 .footer {
     background-color:#e5e5e5;
     padding:10px;
