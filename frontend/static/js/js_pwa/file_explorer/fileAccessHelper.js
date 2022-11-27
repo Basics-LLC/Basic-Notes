@@ -68,6 +68,10 @@ async function generateHandlerInfo(dHandel=null) {
   }
   handleInfo.file_handles =
     await getAllFilesFromDirectoryHandle(handleInfo.handle);
+  if (app.dir_handle === null ||
+    app.dir_handle.name !== handleInfo.handle.name) {
+    app.dir_opened = false;
+  }
   app.dir_handle = handleInfo.handle;
   app.file_handles = handleInfo.file_handles;
   return handleInfo;
