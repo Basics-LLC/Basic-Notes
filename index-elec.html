@@ -9,16 +9,30 @@
 </head>
 
 <body>
-    <div id="main">
-        <input type="text" id="title" placeholder="Name of Note" />
-        <br>
-        <textarea id="textarea" placeholder="Enter text here"></textarea>
+    <div class="heading-container">
+        <img class="logo-img" src="frontend/static/images/basic-logo.png">
+        <h2>Basic Notes</h2>
     </div>
 
-    <div id="wrapper" >
-    <ul id="recent-files"></ul>
-    <ul id="current-dir-files"></ul>
+    <div class="title-container">
+        <input type="text" id="title" placeholder="Name of Note" />
     </div>
+
+    <div class="main-container">
+        <div class="directory-container">
+            <input type="text" id="search" placeholder="Search" />
+            <div id="wrapper" >
+                <ul style="list-style: none" id = "directory-files"></ul>
+                <ul style="list-style: none" none id="recent-files"></ul>
+            </div>
+
+        </div>
+        <div class="editor-container">
+            <textarea id="textarea" placeholder="Enter text here"></textarea>
+        </div>
+    </div>
+
+
 
     <input type="file" id="fileLoader" name="files" title="Load File" accept=".txt, .md" />
 

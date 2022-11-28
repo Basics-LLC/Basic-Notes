@@ -29,7 +29,7 @@ function bindAllEventListenersInElec() {
   const simplemde = new SimpleMDEClass({element: document.getElementById('textarea')});
   const noteTitle = document.getElementById('title');
   const recentFiles = document.getElementById('recent-files');
-  const currDirFiles = document.getElementById('current-dir-files');
+  const currDirFiles = document.getElementById('directory-files');
 
 
   let activeFile ='';
