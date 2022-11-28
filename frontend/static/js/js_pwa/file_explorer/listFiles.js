@@ -12,11 +12,11 @@ const allowedFormats = ['md', 'txt'];
 
 /**
  * Waiting for @Harshit to add
- * @param {string} titleId The id of the title element
+ * @param {array} ids Ids of the element to be cleared
  * @param {Object} simplemde The editor object
  * @param {*} dHandel Waiting for @Harshit to add
  */
-async function listFiles(titleId, simplemde, dHandel=null) {
+async function listFiles(ids, simplemde, dHandel=null) {
   const listElement = document.getElementById('directory-files');
   const dirInfo = await generateHandlerInfo(dHandel);
   if (dirInfo == null) {
@@ -32,7 +32,7 @@ async function listFiles(titleId, simplemde, dHandel=null) {
     itemIds.push(createListItem(fileHandleDir, listElement));
   });
 
-  cleanUp([titleId], simplemde);
+  cleanUp(ids, simplemde);
 
   if (!app.dir_opened) {
     app.dir_opened = true;

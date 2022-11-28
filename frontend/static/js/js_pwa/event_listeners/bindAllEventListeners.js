@@ -58,7 +58,7 @@ function bindAllEventListeners() {
       fileSelectorId, titleId, simplemde);
   bindEventListenerAsync(saveFileId, clickEvent, saveFile, titleId, simplemde);
   bindEventListenerAsync(openDirField, clickEvent, listFiles,
-      titleId, simplemde);
+      [titleId, searchId], simplemde);
   document.getElementById(searchId).disabled = true;
 }
 
