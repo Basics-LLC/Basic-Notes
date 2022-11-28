@@ -3,7 +3,7 @@ export {bindAllEventListeners, bindAllEventListenersForFS};
 import {cleanUp} from '../text_handlers/cleanUp.js';
 import {openFileDialog, readFile} from '../text_handlers/upload.js';
 import {saveFile} from '../text_handlers/save.js';
-import {listFiles} from '../file_explorer/listFiles.js';
+import {listFiles, searchFS} from '../file_explorer/listFiles.js';
 import {saveFileFS, openFileFS, createNewFileFS}
   from '../file_explorer/fileSystemHelper.js';
 import {simplemde} from '../index.js';
@@ -14,9 +14,11 @@ const saveFileId = 'save-file';
 const openDirField = 'open-directory';
 const titleId = 'title';
 const fileSelectorId = 'fileLoader';
+const searchId = 'search';
 
 const clickEvent = 'click';
 const changeEvent = 'change';
+const onInputEvent = 'input';
 
 /**
  * Bind an event listener based on given parameters.
@@ -57,6 +59,7 @@ function bindAllEventListeners() {
   bindEventListenerAsync(saveFileId, clickEvent, saveFile, titleId, simplemde);
   bindEventListenerAsync(openDirField, clickEvent, listFiles,
       titleId, simplemde);
+  document.getElementById(searchId).disabled = true;
 }
 
 /**
@@ -102,6 +105,9 @@ function bindAllEventListenersForFS(itemIds, init=false) {
       createNewFileFS, titleId, simplemde);
   document.getElementById(uploadFileId).disabled = true;
   document.getElementById(titleId).disabled = true;
+  document.getElementById(searchId).disabled = false;
   bindEventListenerAsync(saveFileId, clickEvent,
       saveFileFS, titleId, simplemde);
+  document.getElementById(searchId).addEventListener(onInputEvent,
+      searchFS, false);
 }

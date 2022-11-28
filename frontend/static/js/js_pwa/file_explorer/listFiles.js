@@ -1,10 +1,12 @@
-export {listFiles, addNewFile};
+export {listFiles, addNewFile, searchFS};
 import {generateHandlerInfo} from './fileAccessHelper.js';
 import {bindAllEventListenersForFS} from
   '../event_listeners/bindAllEventListeners.js';
 import {app} from '../index.js';
-import {filterCertainFormats} from './fileFilters.js';
+import {filterCertainFormats, filterCertainKeyword}
+  from './fileFilters.js';
 import {cleanUp} from '../text_handlers/cleanUp.js';
+import {readFromFile} from './fileSystemHelper.js';
 
 const allowedFormats = ['md', 'txt'];
 
@@ -70,4 +72,24 @@ function createListItem(file, listElement) {
   child.innerHTML = file.name;
   listElement.append(child);
   return child.id;
+}
+
+/**
+ * Search by keyword among files
+ * @param {Event} event Triggered input event
+ */
+function searchFS(event) {
+  const keyword = event.currentTarget.value;
+  app.file_handles.forEach(async (file) => {
+    if (!filterCertainFormats(file.name, allowedFormats)) {
+      return;
+    }
+    const text = await readFromFile(file);
+    const id = file.name;
+    if (!filterCertainKeyword(text, keyword)) {
+      document.getElementById(id).style.display = 'none';
+    } else {
+      document.getElementById(id).style.display = 'list-item';
+    }
+  });
 }

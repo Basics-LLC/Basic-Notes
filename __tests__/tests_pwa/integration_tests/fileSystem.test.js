@@ -234,3 +234,27 @@ test('Save File', async ({page}) => {
   await page.getByText('test1.md').click();
   await expect(page).toHaveScreenshot();
 });
+
+test('Search', async ({page}) => {
+  await page.goto('./');
+  await page.locator('#open-directory').click();
+  await page.getByPlaceholder('Search').fill('1');
+  await page.setViewportSize({width: 1600, height: 1200});
+  await expect(page).toHaveScreenshot();
+  await expect(page.getByRole('listitem')).toHaveCount(1);
+
+  await page.locator('#new-file').click();
+  await page.getByPlaceholder('Search').fill('3');
+  await expect(page).toHaveScreenshot();
+  await expect(page.getByRole('listitem')).toHaveCount(1);
+
+  await page.getByPlaceholder('Search').fill('');
+  await expect(page).toHaveScreenshot();
+  await expect(page.getByRole('listitem')).toHaveCount(3);
+
+  await page.getByText('test1.md').click();
+  await page.locator('#save-file').click();
+  await page.getByPlaceholder('Search').fill('added');
+  await expect(page).toHaveScreenshot();
+  await expect(page.getByRole('listitem')).toHaveCount(1);
+});

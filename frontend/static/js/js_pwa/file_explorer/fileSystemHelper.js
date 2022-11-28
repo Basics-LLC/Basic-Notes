@@ -1,4 +1,4 @@
-export {saveFileFS, openFileFS, createNewFileFS};
+export {saveFileFS, openFileFS, createNewFileFS, readFromFile};
 import {addNewFile} from './listFiles.js';
 import {app} from '../index.js';
 import {onFileReadListener} from '../text_handlers/upload.js';
