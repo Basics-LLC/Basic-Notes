@@ -70,9 +70,9 @@ function bindAllEventListeners() {
 function bindSingleFileOpenListenerAsync(elementId, simplemde) {
   document.getElementById(elementId).addEventListener(clickEvent, async (e) => {
     for (const element of document.getElementsByTagName('li')) {
-      element.style.outline = 'none';
+      element.style.backgroundColor = 'transparent';
     }
-    e.target.style.outline = 'solid blue 2px';
+    e.target.style.backgroundColor = 'LightSkyBlue';
     openFileFS(elementId, titleId, simplemde);
   });
 }

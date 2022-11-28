@@ -12,6 +12,10 @@ import {onFileReadListener} from '../text_handlers/upload.js';
  * eslint-disable-line no-unused-vars
  */
 async function writeToFile(fileName, contents, titleId, simplemde) {
+  if (fileName === null || fileName === '') {
+    alert('Please open a file or create a file firstly');
+    return;
+  }
   const fileHandle = await app.dir_handle.getFileHandle(fileName);
   const writable = await fileHandle.createWritable();
   await writable.write(contents);
@@ -93,6 +97,9 @@ async function createNewFileFS(titleId, simplemde) {
       return null;
     }
   });
+  if (newHandle === null) {
+    return null;
+  }
   const file = await newHandle.getFile();
   app.new_files.push(file);
   onFileReadListener(titleId, file.name, await readFromFile(file), simplemde);
