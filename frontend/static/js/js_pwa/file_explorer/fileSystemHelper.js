@@ -16,8 +16,25 @@ async function writeToFile(fileName, contents, titleId, simplemde) {
     alert('Please open a file or create a file firstly');
     return;
   }
-  const fileHandle = await app.dir_handle.getFileHandle(fileName);
-  const writable = await fileHandle.createWritable();
+  const fileHandle = await app.dir_handle.getFileHandle(fileName)
+      .catch(function(e) {
+        if (e instanceof DOMException && e.name == 'NotAllowedError') {
+          return null;
+        } else if (e instanceof DOMException && e.name == 'NotFoundError') {
+          alert('Could not find the file on your file system!');
+        }
+      });
+  if (fileHandle == null) {
+    return;
+  }
+  const writable = await fileHandle.createWritable().catch(function(e) {
+    if (e.name == 'NotAllowedError') {
+      return;
+    }
+  });
+  if (writable == null) {
+    return;
+  }
   await writable.write(contents);
   await writable.close();
   const file = await fileHandle.getFile();
@@ -57,7 +74,12 @@ async function saveFileFS(titleId, simplemde) {
  */
 async function readFromFile(flHandle) {
   const reader = await flHandle.stream().getReader();
-  const data = await reader.read();
+  const data = await reader.read().catch(function() {
+    alert('Could not read the file: ' + flHandle.name);
+  });
+  if (data == null) {
+    return;
+  }
   return new TextDecoder().decode(data.value);
   // run repopulate list function
 }

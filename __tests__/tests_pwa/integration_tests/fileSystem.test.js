@@ -79,7 +79,7 @@ test.beforeEach(async ({page}) => {
        * @return {MockFSDirectryHandlerClass}
        * The mocked file handler
        */
-      getFileHandle(fileName) {
+      async getFileHandle(fileName) {
         for (const file of this._itemList) {
           if (file.name === fileName) {
             return file;
@@ -101,7 +101,7 @@ test.beforeEach(async ({page}) => {
        * @return {MockFSDirectryHandlerClass}
        * The mocked file handler
        */
-      createWritable() {
+      async createWritable() {
         return this;
       }
 
@@ -163,7 +163,7 @@ test.beforeEach(async ({page}) => {
        * Return the encoded value of contents.
        * @return {dictionary} Encoded content value
        */
-      read() {
+      async read() {
         const encoder = new TextEncoder();
         const encodedContent = encoder.encode(this.content);
         return {value: encodedContent};
