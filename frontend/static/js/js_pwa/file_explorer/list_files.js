@@ -1,7 +1,7 @@
 import {generateHandlerInfo} from './file_access_helper.js';
 
 /**
- * Waiting for @Harshit to add
+ * It opens the file picker and creates the list of files for the directory selected
  */
 async function listFiles() {
   const listElement = document.getElementById('directory-files');
