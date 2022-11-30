@@ -1,8 +1,8 @@
 /**
  * Function to write the file
- * @param {*} dHandel Waiting for @Harshit to add
- * @param {*} flHandle Waiting for @Harshit to add
- * @param {*} contents Waiting for @Harshit to add
+ * @param {*} dHandel Directory where the file resides
+ * @param {*} flHandle File handle to write
+ * @param {*} contents Contents of the file
  * eslint-disable-line no-unused-vars
  */
 async function writeToFile(dHandel, flHandle, contents) {
@@ -14,8 +14,8 @@ async function writeToFile(dHandel, flHandle, contents) {
 
 /**
  * Function to read the file
- * @param {*} flHandle Waiting for @Harshit to add
- * @return {*} Waiting for @Harshit to add
+ * @param {*} flHandle handle of the file to read from
+ * @return {*} the contents of the file as string
  */
 async function readFromFile(flHandle) {
   reader = await flHandle.stream().getReader();
