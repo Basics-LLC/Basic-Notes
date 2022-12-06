@@ -26,6 +26,12 @@ Alternatively, you can run the command `npm run presubmit:pwa` at the root path 
 
 ## PWA Guideline
 
+### Website URL
+
+[URL]: https://basics-llc.github.io/Basic-Notes/
+
+
+
 ### Two Modes
 
 1. Basic Mode: Under this mode, users can only upload file and save the current contents as a new file.
@@ -56,4 +62,4 @@ located at `/__tests__/tests_pwa/integration_tests`.
 
 ### Online JSDoc
 
-`https://basics-llc.github.io/Basic-Notes/jsdoc/`
+[URL]: https://basics-llc.github.io/Basic-Notes/jsdoc/
