@@ -23,3 +23,37 @@ Before committing your changes, please follow below steps:
 5. Run command `npm run jsdoc:pwa` at the root directory.
 
 Alternatively, you can run the command `npm run presubmit:pwa` at the root path to check at once. But for debugging you should run the above commands step by step.
+
+## PWA Guideline
+
+### Two Modes
+
+1. Basic Mode: Under this mode, users can only upload file and save the current contents as a new file.
+2. Advanced Mode: Under this mode, users can open a local directory and edit files in this directory.
+
+#### Mode Switch
+
+Users can only switch from Basic Mode to Advanced Mode by clicking `OPEN DIRECTORY` button.
+
+### Tests
+
+#### Unit Tests
+
+located at `/__tests__/tests_pwa/unit_tests`.
+
+1. `createNewFile.test.js`: This test is used to test the cleanUp function, which aims to clear the current contents of file name and text.
+2. `uploadFile.test.js`: This test is used to verify file name and text could be displayed successfully.
+3. `saveFile.test.js`: This test is used to test whether the download link has been generated successfully.
+4. `filter.test.js`: This test is used to check the functionality of file list filter.
+
+#### Integration Tests
+
+located at `/__tests__/tests_pwa/integration_tests`.
+
+1. `launch.test.js`: This test is used to test whether the web app could be loaded correctly. Including UI test.
+2. `basicScenario.test.js`: This test describes several scenarios of the web app under basic mode. Including UI test.
+3. `advancedScenario.test.js`: This test describes several scenarios of the web app under advanced mode. Including UI test.
+
+### Online JSDoc
+
+`https://basics-llc.github.io/Basic-Notes/jsdoc/`
