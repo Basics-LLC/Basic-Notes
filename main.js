@@ -4,6 +4,9 @@ remoteMain.initialize();
 
 let mainWindow;
 
+/**
+ * Creates a renderer window
+ */
 function createWindow() {
   mainWindow = new BrowserWindow({
     width: 1000, height: 800,
@@ -18,7 +21,9 @@ function createWindow() {
   // mainWindow.webContents.openDevTools();
 
   // Create Menu
-  menuTemplate = require('./frontend/static/js/js_electron/menu.js')(mainWindow);
+  menuTemplate = require(
+      './frontend/static/js/js_electron/menu.js',
+  )(mainWindow);
   const menu = Menu.buildFromTemplate(menuTemplate);
   Menu.setApplicationMenu(menu);
 
