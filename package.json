@@ -16,7 +16,9 @@
     "package": "electron-forge package",
     "make": "electron-forge make",
     "jsdoc:pwa": "./node_modules/.bin/jsdoc -c jsdoc.pwa.json",
-    "presubmit:pwa": "npm run lint:pwa && npm run test_pwa:unit && npm run test_pwa:integration && npm run jsdoc:pwa"
+    "jsdoc:elec": "./node_modules/.bin/jsdoc -c jsdoc.elec.json",
+    "presubmit:pwa": "npm run lint:pwa && npm run test_pwa:unit && npm run test_pwa:integration && npm run jsdoc:pwa",
+    "presubmit:elec": "npm run lint:elec && npm run test_elec:integration && npm run jsdoc:elec"
   },
   "repository": {
     "type": "git",
