@@ -19,5 +19,5 @@ test('Have SimpleMDE', async () => {
 
 test('Screenshot Check', async () => {
   await page.setViewportSize({width: 1600, height: 1200});
-  await expect(page).toHaveScreenshot();
+  await expect(page).toHaveScreenshot({maxDiffPixelRatio: 0.01});
 });
