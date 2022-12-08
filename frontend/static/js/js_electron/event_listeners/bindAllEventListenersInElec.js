@@ -26,7 +26,11 @@ function bindAllEventListenersInElec() {
   const newFileBtn = document.getElementById('new-file');
   const uploadFileBtn = document.getElementById('upload-file');
   const saveFileBtn = document.getElementById('save-file');
-  const simplemde = new SimpleMDEClass({element: document.getElementById('textarea')});
+  const simplemde = new SimpleMDEClass(
+      {
+        element: document.getElementById('textarea'),
+      },
+  );
   const noteTitle = document.getElementById('title');
   const recentFiles = document.getElementById('recent-files');
   const currDirFiles = document.getElementById('directory-files');
@@ -85,13 +89,13 @@ function bindAllEventListenersInElec() {
 
   document.getElementById('wrapper').addEventListener('click', function(e) {
     if (e.target.classList.contains('recent-file')) {
-      var el = e.target;
-      var path = el.getAttribute('data-path');
+      const el = e.target;
+      const path = el.getAttribute('data-path');
       openFile(path);
       return false;
     } else if (e.target.classList.contains('curr-dir-file')) {
-      var el = e.target;
-      var path = el.getAttribute('data-path');
+      const el = e.target;
+      const path = el.getAttribute('data-path');
       console.log(path);
       openFile(path);
       return false;
@@ -165,7 +169,9 @@ function bindAllEventListenersInElec() {
 
   function openSaveDialog(df) {
     const file = dialog.showSaveDialog(
-        {title: 'Save Note', defaultPath: df, properties: ['selectFile'], filters: [{name: 'Markdown file', extensions: ['md']}]});
+        {title: 'Save Note',
+          defaultPath: df, properties: ['selectFile'],
+          filters: [{name: 'Markdown file', extensions: ['md']}]});
     setActiveFile(file.filePath);
     return file;
   }
@@ -238,12 +244,17 @@ function bindAllEventListenersInElec() {
   }
 
   function createRecentFilesView(data) {
-    const template = `<li>
-      <a class="recent-file" data-path="{location}" href="javascript:void(0)">{name}</a>
-  </li>`;
-    let output =`<li class="sidebar-brand">
+    const template = `
+    <li>
+      <a class="recent-file" data-path="{location}" href="javascript:void(0)">
+        {name}
+      </a>
+    </li>`;
+    let output =`
+    <li class="sidebar-brand">
       <b>Recent Files</b>
-      </a></li>`;
+      </a>
+    </li>`;
     for (let i = 0; i < data.length; i++) {
       const obj = data[i];
       output += addDataTotemplate(template, shortenText(obj.name), obj.path );
@@ -252,9 +263,15 @@ function bindAllEventListenersInElec() {
   }
 
   function createCurrentDirFilesView(data) {
-    const template = `<li>
-      <a class="curr-dir-file" data-path="{location}" href="javascript:void(0)">{name}</a>
-  </li>`;
+    const template = `
+    <li>
+        <a 
+            class="curr-dir-file" 
+            data-path="{location}" 
+            href="javascript:void(0)">
+                {name}
+        </a>
+    </li>`;
     let output =`<li class="sidebar-brand">
       <b>Files</b>
       </a></li>`;

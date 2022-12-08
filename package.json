@@ -1,7 +1,7 @@
 {
   "name": "basic-notes",
   "version": "1.0.0",
-  "description": "",
+  "description": "A basic note keeping app",
   "main": "main.js",
   "scripts": {
     "test_pwa:unit": "jest --testPathPattern=__tests__/tests_pwa/unit_tests",
@@ -23,7 +23,7 @@
     "url": "git+https://github.com/Basics-LLC/Basice-Notes.git"
   },
   "keywords": [],
-  "author": "",
+  "author": "Basics LLC",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/Basics-LLC/Basice-Notes/issues"

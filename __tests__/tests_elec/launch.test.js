@@ -53,7 +53,8 @@ test.describe('file handling', async () => {
 
   test('upload file button', async () => {
     await page.locator('#save-file').click();
-    await page.locator('#fileLoader').setInputFiles('./__tests__/tests_elec/testUpload.txt');
+    await page.locator('#fileLoader').
+        setInputFiles('./__tests__/tests_elec/testUpload.txt');
     const title = await page.inputValue('#title');
     expect(title).toBe('testUpload.txt');
     const content = await page.inputValue('#textarea');
