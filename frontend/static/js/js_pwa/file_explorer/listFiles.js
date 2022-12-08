@@ -11,10 +11,9 @@ import {readFromFile} from './fileSystemHelper.js';
 const allowedFormats = ['md', 'txt'];
 
 /**
- * Waiting for @Harshit to add
  * @param {array} ids Ids of the element to be cleared
  * @param {Object} simplemde The editor object
- * @param {*} dHandel Waiting for @Harshit to add
+ * @param {Object} dHandel DirectoryHandle of the selected directory
  */
 async function listFiles(ids, simplemde, dHandel=null) {
   const listElement = document.getElementById('directory-files');
