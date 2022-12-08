@@ -4,6 +4,9 @@ remoteMain.initialize();
 
 let mainWindow;
 
+/**
+ * Creates a renderer window
+ */
 function createWindow() {
   mainWindow = new BrowserWindow({
     width: 1000, height: 800,
