@@ -29,5 +29,5 @@ jobs:
         node-version: ${{ matrix.node-version }}
     - run: npm ci
     - run: npm run build --if-present
-    - run: xvfb-run --auto-servernum --server-args="-screen 0 1280x960x24" -- npm run test_elec:integration --if-present
+    - run: xvfb-run --auto-servernum --server-args="-screen 0 1600x1200x24" -- npm run test_elec:integration --if-present
     - run: npm run jsdoc:elec
