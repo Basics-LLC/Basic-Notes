@@ -24,8 +24,8 @@ async function* getFilesRecursively(pathDepth, entry) {
 
 /**
  * Returns the files in the Directory Handle
- * @param {*} directoryHandle Waiting for @Harshit to add
- * @return {*} Waiting for @Harshit to add
+ * @param {DirectoryHandle} directoryHandle directory handle to list the files inside it
+ * @return {List} List of files from the directory passed
  */
 async function getAllFilesFromDirectoryHandle(directoryHandle) {
   const allFiles = [];
@@ -37,7 +37,7 @@ async function getAllFilesFromDirectoryHandle(directoryHandle) {
 
 /**
  * Opens the file picker and returns the selected directory handle
- * @return {*} Waiting for @Harshit to add
+ * @return {Object} Returns the directory handle of the selected directory
  */
 async function openFilePicker() {
   const fileHandle = await window.showDirectoryPicker().catch(function(e) {
@@ -50,8 +50,8 @@ async function openFilePicker() {
 
 /**
  * generate the handler info for the app
- * @param {*} dHandel Waiting for @Harshit to add
- * @return {*} Waiting for @Harshit to add
+ * @param {Object} dHandel DirectoryHandle to genereate info
+ * @return {Object} Info regarding the directory needed to run the app
  */
 async function generateHandlerInfo(dHandel=null) {
   const handleInfo = {
