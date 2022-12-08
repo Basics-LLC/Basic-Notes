@@ -4,7 +4,7 @@ import {app} from '../index.js';
 /**
  * Returns the files in the Directory Handle entry point
  * @param {number} pathDepth Current directory path depth, limit: 1
- * @param {*} entry Waiting for @Harshit to add
+ * @param {DirectoryHandle} entry Handle of the entry point
  */
 async function* getFilesRecursively(pathDepth, entry) {
   if (entry.kind === 'file') {
