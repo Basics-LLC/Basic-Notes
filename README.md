@@ -2,15 +2,9 @@
 
 After cloning the repo, please run `npm install`.
 
-In order to run the app, run `npm start`. This will open the app.
+In order to see the **PWA** version webpage, run `npm start`. This will open the app at https://localhost:8080.
 
 In order to package the app into a desktop application, run `npm run make`. This will create an `out/` directory which will house your packaged app.
-
-To run eslint test: `npm run lint`.
-
-To fix eslint errors: `npm run lint-fix`.
-
-To run unit tests: `npm test`.
 
 ## PWA Version Push Rules
 
@@ -24,13 +18,11 @@ Before committing your changes, please follow below steps:
 
 Alternatively, you can run the command `npm run presubmit:pwa` at the root path to check at once. But for debugging you should run the above commands step by step.
 
-## PWA Guideline
+## PWA Guideline For TA
 
 ### Website URL
 
 `https://basics-llc.github.io/Basic-Notes/`
-
-
 
 ### Two Modes
 
@@ -62,4 +54,10 @@ located at `/__tests__/tests_pwa/integration_tests`.
 
 ### Online JSDoc
 
-`https://basics-llc.github.io/Basic-Notes/jsdoc/`
+`https://basics-llc.github.io/Basic-Notes/jsdoc_pwa/`
+
+## Electron Guideline For TA
+
+### Online JSDoc
+
+`https://basics-llc.github.io/Basic-Notes/jsdoc_elec/`
