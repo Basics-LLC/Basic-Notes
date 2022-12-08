@@ -24,7 +24,8 @@ async function* getFilesRecursively(pathDepth, entry) {
 
 /**
  * Returns the files in the Directory Handle
- * @param {DirectoryHandle} directoryHandle directory handle to list the files inside it
+ * @param {DirectoryHandle} directoryHandle directory
+ * handle to list the files inside it
  * @return {List} List of files from the directory passed
  */
 async function getAllFilesFromDirectoryHandle(directoryHandle) {
