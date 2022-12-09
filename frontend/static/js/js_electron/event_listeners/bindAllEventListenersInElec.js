@@ -106,6 +106,7 @@ function bindAllEventListenersInElec() {
   /**
  * Saves file to provided path
  * @param {string} filename Path of the file to save (including filename)
+ * @function bindAllEventListenersInElec/saveFile
  */
   function saveFile(filename) {
     setActiveFile(filename);
@@ -115,6 +116,7 @@ function bindAllEventListenersInElec() {
   /**
  * Opens file into the editor from the provided path
  * @param {string} filename Path of the file to save (including filename)
+ * @function bindAllEventListenersInElec/openFile
  */
   function openFile(filename) {
     setActiveFile(filename);
@@ -126,6 +128,7 @@ function bindAllEventListenersInElec() {
   /**
  * Cancels the editing of files,
  * and restores intermediate variables to their defaults
+ * @function bindAllEventListenersInElec/cancelFileEdit
  */
   function cancelFileEdit() {
     setActiveFile(undefined);
@@ -136,6 +139,7 @@ function bindAllEventListenersInElec() {
   // Utililty Functions
   /**
  * Writes content of opened file to the text area
+ * @function bindAllEventListenersInElec/writeFileToTextArea
  */
   function writeFileToTextArea() {
     const currentFile = getActiveFile();
@@ -148,6 +152,7 @@ function bindAllEventListenersInElec() {
   /**
  * Checks if there is an active file, returns false if there isn't
  * @return {boolean} Is there an active file?
+ * @function bindAllEventListenersInElec/isFileActive
  */
   function isFileActive() {
     if (activeFile=== undefined || activeFile ==='') {
@@ -158,6 +163,7 @@ function bindAllEventListenersInElec() {
   /**
  * Gets the active file
  * @return {string} Path of active file
+ * @function bindAllEventListenersInElec/getActiveFile
  */
   function getActiveFile() {
     return activeFile;
@@ -165,6 +171,7 @@ function bindAllEventListenersInElec() {
   /**
  * Writes content of the textbox to the file path provided
  * @param {string} fname Path of the file to save (including filename)
+ * @function bindAllEventListenersInElec/createFile
  */
   function createFile(fname) {
     const content=simplemde.value();
@@ -176,6 +183,7 @@ function bindAllEventListenersInElec() {
  * Validates if given file is txt or markdown
  * @param {string} filename Path of the file to save (including filename)
  * @return {boolean} True if file is txt or md, else false
+ * @function bindAllEventListenersInElec/validateFile
  */
   function validateFile(filename) {
     const ext = path.extname(filename);
@@ -186,6 +194,7 @@ function bindAllEventListenersInElec() {
   }
   /**
  * Sets the note title to the currently opened file
+ * @function bindAllEventListenersInElec/setCurrentFileName
  */
   function setCurrentFileName() {
     const filename = getActiveFile();
@@ -195,6 +204,7 @@ function bindAllEventListenersInElec() {
  * Opens the save file dialog to allow user to specify path of file to save
  * @param {string} df Default path to save file
  * @return {string} User selected path to save file
+ * @function bindAllEventListenersInElec/openSaveDialog
  */
   function openSaveDialog(df) {
     const file = dialog.showSaveDialog(
@@ -207,6 +217,7 @@ function bindAllEventListenersInElec() {
 
   /**
  * Opens the select file dialog to allow user to specify path of file to open
+ * @function bindAllEventListenersInElec/openSelectFileDialog
  */
   async function openSelectFileDialog() {
     const result = await dialog.showOpenDialog(
@@ -218,6 +229,7 @@ function bindAllEventListenersInElec() {
  * Formats the path to only retrive the note title
  * @param {string} fullPath Full path to file
  * @return {string} Parsed note title from path
+ * @function bindAllEventListenersInElec/getFileName
  */
   function getFileName(fullPath) {
     if (fullPath !== undefined) {
@@ -228,6 +240,7 @@ function bindAllEventListenersInElec() {
  * Adds recent file entry to the recents database
  * @param {string} fileName Name of note to add to recents
  * @param {string} filePath Full path of note to add to recents
+ * @function bindAllEventListenersInElec/addRecentFile
  */
   function addRecentFile(fileName, filePath) {
     if (!recentFileExists(fileName)) {
@@ -240,6 +253,7 @@ function bindAllEventListenersInElec() {
  * Sets active file to the file path provided, updates note title, and
  * adds file to recents
  * @param {string} filename Path of file to set as active
+ * @function bindAllEventListenersInElec/setActiveFile
  */
   function setActiveFile(filename) {
     activeFile = filename;
@@ -252,6 +266,7 @@ function bindAllEventListenersInElec() {
  * Checks if given file exists in recent files db
  * @param {string} recentFileName Name of file to search in recents
  * @return {boolean} True if file exists, else false
+ * @function bindAllEventListenersInElec/recentFileExists
  */
   function recentFileExists(recentFileName) {
     const count = db.get('files')
@@ -265,6 +280,7 @@ function bindAllEventListenersInElec() {
   }
   /**
  * Populates the recent files list from the database
+ * @function bindAllEventListenersInElec/getRecentFiles
  */
   function getRecentFiles() {
     const files = db.get('files').value('files');
@@ -274,6 +290,7 @@ function bindAllEventListenersInElec() {
   }
   /**
  * Populates the cureent-dir files list
+ * @function bindAllEventListenersInElec/getCurrentDirFiles
  */
   function getCurrentDirFiles() {
     if (isFileActive()) {
@@ -297,6 +314,7 @@ function bindAllEventListenersInElec() {
  * Generates the recent files list html
  * @param {Array} data List of recent files retrieved from db
  * @return {string} Generated HTML of recent files view
+ * @function bindAllEventListenersInElec/createRecentFilesView
  */
   function createRecentFilesView(data) {
     const template = `
@@ -320,6 +338,7 @@ function bindAllEventListenersInElec() {
  * Generates the current-dir files list html
  * @param {Array} data List of current-dir files
  * @return {string} Generated HTML of current-dir files view
+ * @function bindAllEventListenersInElec/createCurrentDirFilesView
  */
   function createCurrentDirFilesView(data) {
     const template = `
@@ -346,6 +365,7 @@ function bindAllEventListenersInElec() {
  * @param {string} name Name of note
  * @param {string} path Path of note
  * @return {string} Generated HTML
+ * @function bindAllEventListenersInElec/addDataTotemplate
  */
   function addDataTotemplate(temp, name, path) {
     temp = temp.replace('{name}', name);
@@ -354,6 +374,7 @@ function bindAllEventListenersInElec() {
   }
   /**
  * Clears all the recent files db entries
+ * @function bindAllEventListenersInElec/removeAllRecentFiles
  */
   function removeAllRecentFiles() {
     db.get('files')
@@ -363,6 +384,7 @@ function bindAllEventListenersInElec() {
  * Shortens filename with greater than 15 characters
  * @param {string} string Name of file
  * @return {string} Shortened file name
+ * @function bindAllEventListenersInElec/shortenText
  */
   function shortenText(string) {
     if (string.length > 15) {
@@ -376,6 +398,7 @@ function bindAllEventListenersInElec() {
  * @param {string} text Text to write in file
  * @param {string} filePath Path of the file
  * @return {boolean} True if there are errors
+ * @function bindAllEventListenersInElec/writeToFile
  */
   async function writeToFile(text, filePath) {
     if (filePath!== undefined && validateFile(filePath)) {
