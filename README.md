@@ -58,6 +58,17 @@ located at `/__tests__/tests_pwa/integration_tests`.
 
 ## Electron Guideline For TA
 
+### Tests
+
+#### Integration Tests
+
+To run the tests, use `npm run test_elec:integration`
+
+located at `/__tests__/tests_elec/integration_tests`
+
+1. `launch.test.js`: This test is used to test whether the web app could be loaded correctly. Including UI test.
+2. `fileSystem.test.js`: This test is used to test the interaction with the file system.
+
 ### Packaging the app
 In order to obtain a packaged app to simply double-click and get going, run `npm run package`. This will create an `out/` directory which will house your packaged app.
 
