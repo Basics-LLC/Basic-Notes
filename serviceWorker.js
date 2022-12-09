@@ -11,6 +11,7 @@ self.addEventListener('install', (event) => {
           './index.html', // Main HTML file
           './manifest.json', // Manifest file
           './pwa_register.js',
+          './favicon.ico',
           './frontend/static/css/index.css', // Main CSS file
           './frontend/static/css/third_party/simplemde.css',
           './frontend/static/js/js_pwa/index.js', // Main JS file

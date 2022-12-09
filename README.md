@@ -22,7 +22,7 @@ Alternatively, you can run the command `npm run presubmit:pwa` at the root path 
 
 ### Website URL
 
-`https://basics-llc.github.io/Basic-Notes/`
+[https://basics-llc.github.io/Basic-Notes/](https://basics-llc.github.io/Basic-Notes/)
 
 ### Two Modes
 

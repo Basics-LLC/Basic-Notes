@@ -10,6 +10,10 @@ app.get('/serviceWorker.js', (_req, res) => {
   res.sendFile(path.resolve('serviceWorker.js'));
 });
 
+app.get('/favicon.ico', (_req, res) => {
+  res.sendFile(path.resolve('favicon.ico'));
+});
+
 app.get('/pwa_register.js', (_req, res) => {
   res.sendFile(path.resolve('pwa_register.js'));
 });
