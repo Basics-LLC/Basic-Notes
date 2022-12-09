@@ -133,3 +133,6 @@ frontend/static/.DS_Store
 
 #DB
 basics_db.json
+
+#Electron forge outputs
+out/

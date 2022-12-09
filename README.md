@@ -4,7 +4,7 @@ After cloning the repo, please run `npm install`.
 
 In order to see the **PWA** version webpage, run `npm start`. This will open the app at https://localhost:8080.
 
-In order to package the app into a desktop application, run `npm run make`. This will create an `out/` directory which will house your packaged app.
+In order to package the **Electron** app into a desktop application, run `npm run package`. This will create an `out/` directory which will house your packaged app.
 
 ## PWA Version Push Rules
 
@@ -54,10 +54,16 @@ located at `/__tests__/tests_pwa/integration_tests`.
 
 ### Online JSDoc
 
-`https://basics-llc.github.io/Basic-Notes/jsdoc_pwa/`
+[https://basics-llc.github.io/Basic-Notes/jsdoc_pwa/](https://basics-llc.github.io/Basic-Notes/jsdoc_pwa/)
 
 ## Electron Guideline For TA
 
+### Packaging the app
+In order to obtain a packaged app to simply double-click and get going, run `npm run package`. This will create an `out/` directory which will house your packaged app.
+
+### Packaging the app with redistributables and an installer
+In order to obtain a packaged app along with redistributables, run `npm run make`. This will create an `out/` directory which will contain the two directories, one with the app and the other called `make` which will contain the redistributables.
+
 ### Online JSDoc
 
-`https://basics-llc.github.io/Basic-Notes/jsdoc_elec/`
+[https://basics-llc.github.io/Basic-Notes/jsdoc_elec/](https://basics-llc.github.io/Basic-Notes/jsdoc_elec/)
