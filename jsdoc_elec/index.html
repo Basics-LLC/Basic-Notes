@@ -53,7 +53,7 @@
 <li>Run command <code>npm run lint:pwa</code> at the root directory. If these are errors, go to step 2; Or go to step 3.</li>
 <li>Run command <code>npm run lint-fix</code> at the root directory. And then run command <code>npm run lint:pwa</code> at the root directory again. If there are still errors in the second command report, fix them manually.</li>
 <li>Run command <code>npm run test_pwa:unit</code> at the root directory to make sure all tests passed. You <strong>MUST</strong> also write your own tests to cover your functions.</li>
-<li>Run command <code>npm run test_pwa:integration</code> at the root directory to make sure all tests passed. Among them there are screenshots comparison tests. If you changed the UI, make sure to take a look at the generated <code>test-results</code> directory at the root path, where you can compare the expected(original) screenshots and actual(new) screenshots. If they look good, delete <code>__tests__\tests_pwa\integration_tests\*-snapshots</code> directories and run the test for <strong>twice</strong>. You <strong>MUST</strong> also write your own tests to cover your functions.</li>
+<li>Run command <code>npm run test_pwa:integration</code> at the root directory to make sure all tests passed. Among them there are screenshots comparison tests. If you changed the UI, make sure to take a look at the generated <code>test-results</code> directory at the root path, where you can compare the expected(original) screenshots and actual(new) screenshots. If they look good, delete <code>__tests__/tests_pwa/integration_tests/*-snapshots</code> directories and run the test for <strong>twice</strong>. You <strong>MUST</strong> also write your own tests to cover your functions.</li>
 <li>Run command <code>npm run jsdoc:pwa</code> at the root directory.</li>
 </ol>
 <p>Alternatively, you can run the command <code>npm run presubmit:pwa</code> at the root path to check at once. But for debugging you should run the above commands step by step.</p>
@@ -85,6 +85,15 @@
 </ol>
 <h3>Online JSDoc</h3>
 <p><a href="https://basics-llc.github.io/Basic-Notes/jsdoc_pwa/">https://basics-llc.github.io/Basic-Notes/jsdoc_pwa/</a></p>
+<h2>Electron Version Push Rules</h2>
+<p>Before committing your changes, please follow below steps:</p>
+<ol>
+<li>Run command <code>npm run lint:elec</code> at the root directory. If these are errors, go to step 2; Or go to step 3.</li>
+<li>Run command <code>npm run lint-fix</code> at the root directory. And then run command <code>npm run lint:elec</code> at the root directory again. If there are still errors in the second command report, fix them manually.</li>
+<li>Run command <code>npm run test_elec:integration</code> at the root directory to make sure all tests passed. Among them there are screenshots comparison tests. If you changed the UI, make sure to take a look at the generated <code>test-results</code> directory at the root path, where you can compare the expected(original) screenshots and actual(new) screenshots. If they look good, delete <code>__tests__/tests_elec/integration_tests/*-snapshots</code> directories and run the test for <strong>twice</strong>. You <strong>MUST</strong> also write your own tests to cover your functions.</li>
+<li>Run command <code>npm run jsdoc:elec</code> at the root directory.</li>
+</ol>
+<p>Alternatively, you can run the command <code>npm run presubmit:elec</code> at the root path to check at once. But for debugging you should run the above commands step by step.</p>
 <h2>Electron Guideline For TA</h2>
 <h3>Tests</h3>
 <h4>Integration Tests</h4>
@@ -111,13 +120,13 @@
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#bindAllEventListenersInElec">bindAllEventListenersInElec</a></li><li><a href="global.html#flipButtonText">flipButtonText</a></li><li><a href="global.html#flipContentStatus">flipContentStatus</a></li><li><a href="global.html#renderMarkdown">renderMarkdown</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#bindAllEventListenersInElec">bindAllEventListenersInElec</a></li><li><a href="global.html#bindAllEventListenersInElec/addDataTotemplate">bindAllEventListenersInElec/addDataTotemplate</a></li><li><a href="global.html#bindAllEventListenersInElec/addRecentFile">bindAllEventListenersInElec/addRecentFile</a></li><li><a href="global.html#bindAllEventListenersInElec/cancelFileEdit">bindAllEventListenersInElec/cancelFileEdit</a></li><li><a href="global.html#bindAllEventListenersInElec/createCurrentDirFilesView">bindAllEventListenersInElec/createCurrentDirFilesView</a></li><li><a href="global.html#bindAllEventListenersInElec/createFile">bindAllEventListenersInElec/createFile</a></li><li><a href="global.html#bindAllEventListenersInElec/createRecentFilesView">bindAllEventListenersInElec/createRecentFilesView</a></li><li><a href="global.html#bindAllEventListenersInElec/getActiveFile">bindAllEventListenersInElec/getActiveFile</a></li><li><a href="global.html#bindAllEventListenersInElec/getCurrentDirFiles">bindAllEventListenersInElec/getCurrentDirFiles</a></li><li><a href="global.html#bindAllEventListenersInElec/getFileName">bindAllEventListenersInElec/getFileName</a></li><li><a href="global.html#bindAllEventListenersInElec/getRecentFiles">bindAllEventListenersInElec/getRecentFiles</a></li><li><a href="global.html#bindAllEventListenersInElec/isFileActive">bindAllEventListenersInElec/isFileActive</a></li><li><a href="global.html#bindAllEventListenersInElec/openFile">bindAllEventListenersInElec/openFile</a></li><li><a href="global.html#bindAllEventListenersInElec/openSaveDialog">bindAllEventListenersInElec/openSaveDialog</a></li><li><a href="global.html#bindAllEventListenersInElec/openSelectFileDialog">bindAllEventListenersInElec/openSelectFileDialog</a></li><li><a href="global.html#bindAllEventListenersInElec/recentFileExists">bindAllEventListenersInElec/recentFileExists</a></li><li><a href="global.html#bindAllEventListenersInElec/removeAllRecentFiles">bindAllEventListenersInElec/removeAllRecentFiles</a></li><li><a href="global.html#bindAllEventListenersInElec/saveFile">bindAllEventListenersInElec/saveFile</a></li><li><a href="global.html#bindAllEventListenersInElec/setActiveFile">bindAllEventListenersInElec/setActiveFile</a></li><li><a href="global.html#bindAllEventListenersInElec/setCurrentFileName">bindAllEventListenersInElec/setCurrentFileName</a></li><li><a href="global.html#bindAllEventListenersInElec/shortenText">bindAllEventListenersInElec/shortenText</a></li><li><a href="global.html#bindAllEventListenersInElec/validateFile">bindAllEventListenersInElec/validateFile</a></li><li><a href="global.html#bindAllEventListenersInElec/writeFileToTextArea">bindAllEventListenersInElec/writeFileToTextArea</a></li><li><a href="global.html#bindAllEventListenersInElec/writeToFile">bindAllEventListenersInElec/writeToFile</a></li><li><a href="global.html#flipButtonText">flipButtonText</a></li><li><a href="global.html#flipContentStatus">flipContentStatus</a></li><li><a href="global.html#renderMarkdown">renderMarkdown</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.0</a> on Thu Dec 08 2022 20:39:05 GMT-0800 (Pacific Standard Time)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.0</a> on Thu Dec 08 2022 21:00:50 GMT-0800 (Pacific Standard Time)
 </footer>
 
 <script> prettyPrint(); </script>
