@@ -56,6 +56,9 @@ function addNewFile() {
     app.file_handles.push(file);
   });
   bindAllEventListenersForFS(itemIds, false);
+  itemIds.forEach((id) => {
+    document.getElementById(id).click();
+  });
   app.new_files = [];
 }
 
