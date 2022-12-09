@@ -291,26 +291,3 @@ li:hover {
     }
 }
 
-/*@media only screen and (max-width: 283px) {
-    #new-file, #upload-file, #save-file {
-        width: 100%;
-        margin: 10px 0 0 0;
-    }
-    .button-group {
-        display: block;
-        margin: 0;
-    }
-    .main-container {
-        display: block;
-        margin-bottom: 20px;
-        max-height: none;
-        min-height: auto;
-    }
-    .directory-container {
-        max-height: 20%;
-    }
-    ol {
-        max-height: 200px;
-    }
-}
-*/

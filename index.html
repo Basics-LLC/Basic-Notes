@@ -22,7 +22,10 @@
 
     <div class="main-container">
         <div class="directory-container">
-            <button type="button" class="button" id="open-directory">Open Directory</button>
+            <button type="button" class="button" id="open-directory">
+                <object id="open-dir-svg" data="frontend/static/svg/open-dir.svg"> </object> 
+                <span>Open Directory</span>
+            </button>
             <input type="text" id="search" placeholder="Search" />
             <ol id = "directory-files"></ol>
             <input type="file" id="fileLoader" name="files" title="Load File" accept=".txt, .md"/>
@@ -31,9 +34,18 @@
         <div class="editor-container">
             <textarea id="textarea" placeholder="Enter text here"></textarea>
             <div class="button-group">
-                <button type="button" class="button" id="new-file">New File</button>
-                <button type="button" class="button" id="upload-file">Upload File</button>
-                <button type="button" class="button" id="save-file">Save File</button>
+                <button type="button" class="button" id="new-file">
+                    <object data="frontend/static/svg/new-file.svg"> </object> 
+                    <span>New File</span>
+                </button>
+                <button type="button" class="button" id="upload-file">
+                    <object data="frontend/static/svg/upload-file.svg"> </object> 
+                    <span>Upload File</span>
+                </button>
+                <button type="button" class="button" id="save-file">
+                    <object data="frontend/static/svg/save-file.svg"> </object>
+                    <span>Save File</span>
+                </button>
             </div>
         </div>        
     </div>
