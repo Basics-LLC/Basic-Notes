@@ -62,12 +62,13 @@ located at `/__tests__/tests_pwa/integration_tests`.
 
 #### Integration Tests
 
-To run the tests, use `npm run test_elec:integration`
+To run the tests, use 
+`npm run test_elec:integration` at the root directory.
 
-located at `/__tests__/tests_elec/integration_tests`
+The test files are located at `/__tests__/tests_elec/integration_tests`
 
-1. `launch.test.js`: This test is used to test whether the web app could be loaded correctly. Including UI test.
-2. `fileSystem.test.js`: This test is used to test the interaction with the file system.
+1. `launch.test.js`: This test is used to test whether the key elements could be loaded correctly. Including UI test.
+2. `fileSystem.test.js`: This test is used to test the electron app's interaction with the file system.
 
 ### Packaging the app
 In order to obtain a packaged app to simply double-click and get going, run `npm run package`. This will create an `out/` directory which will house your packaged app.
