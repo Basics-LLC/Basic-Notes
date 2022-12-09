@@ -9,12 +9,21 @@ body {
     max-width: 80%;
     margin-left: auto;
     margin-right: auto;
-    height: 80%;
-    max-height: 80%;
+    height: 100%;
+    max-height: 100%;
 }
 a {
     color: #009579;
 }
+object {
+    height: 15px;
+    width: 15px;
+}
+#open-dir-svg {
+    height: 10px;
+    width: 10px;
+}
+
 
 @font-face {
     font-family: headingFont;
@@ -47,7 +56,7 @@ h2 {
 }
 
 .button {
-    flex: 1;
+/*    flex: 1;*/
     position: relative;
     width: 100%;
     margin: 0 0 0 0;
@@ -63,7 +72,7 @@ h2 {
     height: 2.75em;
     letter-spacing: 0.125em;
     line-height: 2.75em;
-    padding: 0 2em;
+    padding: 0 1em;
     text-align: center;
     text-decoration: none;
     text-indent: 0.125em;
@@ -128,13 +137,15 @@ li {
 .main-container {
     max-width: 100%;
     display: flex;
-    max-height: calc(60vh);
-    margin-bottom: 25px;
-    min-height: calc(60vh);
+/*    max-height: calc(60vh);*/
+    margin-bottom: 105px;
+    min-height: calc(50vh);
 }
 .directory-container {
     flex: 15%;
     font-size: 0.7em;
+    margin-right: 5px;
+    border: 1px;
 }
 #directory-files {
     background-color: rgb(245, 245, 245);
@@ -193,10 +204,17 @@ li {
 
 .button-group {
     display: flex;
+    justify-content: center;
+    margin-top: 20px;
 }
 #new-file, #upload-file, #save-file {
-    width: 25%;
-    margin: 0 5px 0 5px;
+    width: 200px;
+}
+#new-file {
+    margin-right: 7%;
+}
+#save-file {
+    margin-left: 7%;
 }
 
 
@@ -213,9 +231,9 @@ button[disabled]{
     margin:20px 0 0 0;
     font-size: 0.5em;
     font-weight: 300;
-    height: 8.5em;
+    height: 2.5em;
     letter-spacing: 0.125em;
-    line-height: 7.5em;
+    line-height: 2.5em;
     text-align: center;
     text-decoration: none;
     text-indent: 0.125em;
@@ -233,13 +251,31 @@ li:hover {
 
 
 /* Responsiveness */
-@media only screen and (max-width: 770px) {
-    #new-file, #upload-file, #save-file {
-        width: 100%;
-        margin: 10px 0 0 0;
+@media only screen and (max-width: 918px) {
+    .main-container {
+        display: block;
+        margin-bottom: 0;
+        max-height: none;
+        min-height: auto;
+    }
+    .directory-container {
+        max-height: 20%;
+    }
+    ol {
+        max-height: 200px;
+    }
+}
+
+@media only screen and (max-width: 670px) {
+    #save-file span, #new-file span, #upload-file span {
+        display: none;
+    }
+    .button {
+        flex: 1;
     }
     .button-group {
-        display: block;
+        display: flex;
+        margin: 0;
     }
     .main-container {
         display: block;
@@ -255,13 +291,14 @@ li:hover {
     }
 }
 
-@media only screen and (max-width: 283px) {
+/*@media only screen and (max-width: 283px) {
     #new-file, #upload-file, #save-file {
         width: 100%;
         margin: 10px 0 0 0;
     }
     .button-group {
         display: block;
+        margin: 0;
     }
     .main-container {
         display: block;
@@ -276,3 +313,4 @@ li:hover {
         max-height: 200px;
     }
 }
+*/
