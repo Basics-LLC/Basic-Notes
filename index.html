@@ -11,16 +11,16 @@
 </head>
 
 <body>
-    <div class="heading-container">
+    <header>
         <img class="logo-img" src="frontend/static/images/basic-logo.png">
         <h2>Basic Notes</h2>
-    </div>
+    </header>
     
     <div class="title-container">
         <input type="text" id="title" placeholder="Name of Note" />
     </div>
 
-    <div class="main-container">
+    <main>
         <div class="directory-container">
             <button type="button" class="button" id="open-directory">
                 <object id="open-dir-svg" data="frontend/static/svg/open-dir.svg"> </object> 
@@ -48,9 +48,10 @@
                 </button>
             </div>
         </div>        
-    </div>
+    </main>
 
-    <div class="footer">Created by Basic LLC</div>
+    <footer>Created by Basic LLC</footer>
+    
     <script type="module" src="frontend/static/js/js_pwa/index.js"></script>
 </body>
 </html>
